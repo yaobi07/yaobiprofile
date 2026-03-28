@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1280" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B0C10"/>
+      <stop offset="1" stop-color="#171A24"/>
+    </linearGradient>
+    <linearGradient id="g" x1="220" y1="170" x2="1060" y2="560" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A78BFA" stop-opacity=".50"/>
+      <stop offset="1" stop-color="#60A5FA" stop-opacity=".50"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" rx="48" fill="url(#bg)"/>
+  <rect x="72" y="72" width="1136" height="576" rx="28" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.10)"/>
+  <circle cx="320" cy="360" r="140" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.10)"/>
+  <path d="M250 400l70-90 70 90" stroke="url(#g)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M650 260h430" stroke="rgba(255,255,255,.10)" stroke-width="16" stroke-linecap="round"/>
+  <path d="M650 320h360" stroke="rgba(255,255,255,.10)" stroke-width="16" stroke-linecap="round"/>
+  <path d="M650 380h410" stroke="rgba(255,255,255,.10)" stroke-width="16" stroke-linecap="round"/>
+  <path d="M650 440h300" stroke="rgba(255,255,255,.10)" stroke-width="16" stroke-linecap="round"/>
+  <text x="110" y="170" fill="rgba(255,255,255,.82)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial" font-size="34" font-weight="700">y� C</text>
+  <text x="110" y="220" fill="rgba(255,255,255,.55)" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial" font-size="22" font-weight="600">*�`M�b:�y�*�	</text>
+</svg>
