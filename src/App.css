@@ -1051,230 +1051,299 @@
   }
 }
 
+/* ───── 平板 / 大屏手机 ≤ 900px ───── */
 @media (max-width: 900px) {
+  .container,
   .heroGrid {
-    gap: 16px;
+    width: min(100%, calc(100% - 32px));
   }
+
+  .heroGrid { gap: 20px; }
+
   .homeSplit {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
+
   .heroCtaBand {
     grid-template-columns: 1fr;
+    gap: 14px;
   }
+
   .ctaPanel {
     flex-direction: column;
     align-items: flex-start;
+    gap: 14px;
   }
+
+  /* 轮播：手机端图片在上，文字在下 */
+  .carousel {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    box-shadow: var(--shadow-soft);
+  }
+
   .carouselSlide {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 0;
     min-height: auto;
+    padding: 0;
   }
+
   .carouselLeft {
-    padding: 22px 12px 0;
+    order: 2;
+    padding: 32px 28px 28px;
   }
+
   .carouselRight {
-    border-radius: 16px;
-  }
-  .carouselControls {
-    padding-top: 14px;
-  }
-  .nav {
-    gap: 6px;
-  }
-  .nav a {
-    padding: 8px 8px;
-  }
-  .container,
-  .heroGrid {
-    width: min(100%, calc(100% - 24px));
-  }
-  .sectionFrame {
-    padding: 20px;
-    border-radius: 18px;
-  }
-  .sectionTitle {
-    font-size: 28px;
-  }
-  .section {
-    padding: 64px 0;
-  }
-  .grid {
-    grid-template-columns: 1fr;
-  }
-  .footerInner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  /* 修复 CSS 特异性：让 reading/projects 轮播在手机上也能正确单列排列 */
-  .section[data-carousel-id="reading"] .carouselSlide,
-  .section[data-carousel-id="projects"] .carouselSlide {
-    grid-template-columns: 1fr;
-  }
-  .section[data-carousel-id="reading"] .carouselRight {
-    aspect-ratio: 2 / 3;
-    max-width: min(260px, 65%);
-    margin: 0 auto;
-    justify-self: center;
-  }
-  .section[data-carousel-id="projects"] .carouselRight {
+    order: 1;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
     aspect-ratio: 16 / 9;
     max-width: 100%;
     justify-self: stretch;
   }
-  /* 缩小轮播字体 */
-  .carouselTitle {
-    font-size: clamp(26px, 5.5vw, 40px);
+
+  /* 阅读区：文字在上，书封面居中在下 */
+  .section[data-carousel-id="reading"] .carouselSlide {
+    grid-template-columns: 1fr;
   }
-  .carouselDesc {
-    font-size: 17px;
+
+  .section[data-carousel-id="reading"] .carouselLeft {
+    order: 1;
+    padding-bottom: 8px;
   }
-  /* 收敛主标题尺寸 */
-  .headline {
-    font-size: clamp(32px, 7vw, 78px);
+
+  .section[data-carousel-id="reading"] .carouselRight {
+    order: 2;
+    aspect-ratio: 2 / 3;
+    max-width: 200px;
+    margin: 0 auto 20px;
+    justify-self: center;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-soft);
   }
-  /* 去除 heroCard 的固定最小宽度，防止溢出 */
-  .heroCard {
-    min-width: 0;
+
+  /* AI 项目：全宽 16:9 图片在上 */
+  .section[data-carousel-id="projects"] .carouselSlide {
+    grid-template-columns: 1fr;
   }
-  /* 能力卡片标题缩小 */
-  .capabilityTitle {
-    font-size: 20px;
+
+  .section[data-carousel-id="projects"] .carouselRight {
+    order: 1;
+    aspect-ratio: 16 / 9;
+    max-width: 100%;
+    justify-self: stretch;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
   }
+
+  .carouselControls {
+    padding: 16px 8px 8px;
+    gap: 12px;
+  }
+
+  .nav { gap: 6px; }
+  .nav a { padding: 8px; }
+
+  .sectionFrame {
+    padding: 28px;
+    border-radius: 20px;
+  }
+
+  .sectionTitle { font-size: 28px; }
+
+  .section { padding: 72px 0; }
+
+  .grid { grid-template-columns: 1fr; }
+
+  .footerInner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .carouselTitle { font-size: clamp(28px, 5.5vw, 44px); }
+  .carouselDesc { font-size: 18px; }
+  .headline { font-size: clamp(34px, 7vw, 78px); }
+  .heroCard { min-width: 0; }
+  .capabilityTitle { font-size: 21px; }
 }
 
-/* 中等手机：≤ 640px */
+/* ───── 中等手机 ≤ 640px ───── */
 @media (max-width: 640px) {
-  .section {
-    padding: 56px 0;
+  .container,
+  .heroGrid {
+    width: min(100%, calc(100% - 28px));
   }
-  .heroSection {
-    padding-top: 48px;
+
+  .section { padding: 62px 0; }
+  .heroSection { padding-top: 52px; }
+  .heroGrid { gap: 18px; }
+
+  /* 头像卡片：横向排列，节省空间更清晰 */
+  .heroCard {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    border-radius: 18px;
   }
-  .carouselTitle {
-    font-size: clamp(22px, 5.5vw, 32px);
+
+  .avatar {
+    width: 68px;
+    height: 68px;
+    flex-shrink: 0;
+    margin: 0;
   }
-  .carouselDesc {
-    font-size: 16px;
+
+  .heroMeta {
+    text-align: left;
+    padding: 0;
   }
-  .capabilityTitle {
-    font-size: 18px;
-  }
-  .capabilityDesc {
-    font-size: 14px;
-  }
-  .heroCtaBand {
-    gap: 10px;
-  }
-  .ctaPanelText {
-    font-size: 16px;
+
+  .carouselLeft { padding: 28px 22px 24px; }
+  .carouselTitle { font-size: clamp(24px, 5.5vw, 36px); }
+  .carouselDesc { font-size: 17px; line-height: 1.68; }
+
+  .capabilityStack { gap: 10px; }
+  .capabilityTitle { font-size: 19px; }
+  .capabilityDesc { font-size: 14px; }
+
+  .ctaPanelText { font-size: 17px; }
+
+  .section[data-carousel-id="reading"] .carouselRight {
+    max-width: 180px;
   }
 }
 
-/* 小屏手机：≤ 480px */
+/* ───── 小屏手机 ≤ 480px ───── */
 @media (max-width: 480px) {
-  .topbar {
-    padding: 10px 12px;
+  .container,
+  .heroGrid {
+    width: min(100%, calc(100% - 24px));
   }
-  .nav {
-    gap: 2px;
-  }
+
+  .topbar { padding: 10px 14px; }
+  .nav { gap: 2px; }
   .nav a {
-    padding: 6px 5px;
+    padding: 7px 6px;
     font-size: 12px;
   }
+
   .headline {
     font-size: clamp(26px, 8vw, 42px);
-    letter-spacing: -0.6px;
+    letter-spacing: -0.5px;
   }
+
   .subhead {
     font-size: 16px;
     margin-bottom: 14px;
   }
-  .section {
-    padding: 44px 0;
-  }
-  .heroSection {
-    padding-top: 36px;
-  }
-  .heroGrid {
-    gap: 12px;
-  }
+
+  .section { padding: 52px 0; }
+  .heroSection { padding-top: 40px; }
+  .heroGrid { gap: 14px; }
+
   .sectionFrame {
-    padding: 14px;
-    border-radius: 14px;
+    padding: 20px;
+    border-radius: 16px;
   }
-  .sectionTitle {
-    font-size: 22px;
-  }
-  .carouselLeft {
-    padding: 14px 8px 0;
-  }
+
+  .sectionTitle { font-size: 23px; }
+
+  .carouselLeft { padding: 24px 20px 20px; }
+
   .carouselTitle {
-    font-size: clamp(20px, 6.5vw, 28px);
+    font-size: clamp(21px, 6.5vw, 30px);
     letter-spacing: -0.3px;
   }
+
   .carouselDesc {
     font-size: 15px;
-    margin-bottom: 12px;
+    line-height: 1.68;
+    margin-bottom: 14px;
   }
+
   .carouselControls {
-    padding-top: 10px;
+    padding: 14px 8px 6px;
     gap: 10px;
   }
+
   .ctaPanel {
-    padding: 14px;
-    border-radius: 16px;
-    gap: 10px;
+    padding: 18px;
+    border-radius: 18px;
+    gap: 12px;
   }
-  .ctaPanelText {
-    font-size: 15px;
-  }
+
+  .ctaPanelText { font-size: 15px; }
+
   .heroCard {
-    padding: 14px;
+    padding: 16px 18px;
     border-radius: 16px;
+    gap: 14px;
   }
+
+  .avatar {
+    width: 60px;
+    height: 60px;
+  }
+
   .capabilityCard {
-    padding: 12px;
-    border-radius: 12px;
+    padding: 14px 16px;
+    border-radius: 14px;
   }
-  .capabilityTitle {
-    font-size: 16px;
-  }
-  .capabilityDesc {
-    font-size: 13px;
-  }
+
+  .capabilityTitle { font-size: 17px; }
+  .capabilityDesc { font-size: 13px; }
+
   .btn {
     font-size: 14px;
     padding: 9px 13px;
   }
+
   .chip {
     font-size: 13px;
     padding: 6px 9px;
   }
+
+  .section[data-carousel-id="reading"] .carouselRight {
+    max-width: 160px;
+    margin-bottom: 16px;
+  }
 }
 
-/* 超小屏：≤ 360px（iPhone SE 等） */
+/* ───── 超小屏 ≤ 360px（iPhone SE 等） ───── */
 @media (max-width: 360px) {
+  .container,
+  .heroGrid {
+    width: min(100%, calc(100% - 20px));
+  }
+
   .nav a {
     padding: 5px 4px;
     font-size: 11px;
   }
-  .brand {
-    font-size: 12px;
-  }
+
+  .brand { font-size: 12px; }
+
   .brandDot {
     width: 8px;
     height: 8px;
   }
-  .headline {
-    font-size: clamp(22px, 7.5vw, 32px);
+
+  .headline { font-size: clamp(22px, 7.5vw, 32px); }
+  .carouselTitle { font-size: clamp(18px, 6vw, 26px); }
+
+  .heroCard {
+    padding: 14px 16px;
+    gap: 12px;
   }
-  .carouselTitle {
-    font-size: clamp(18px, 6vw, 26px);
-  }
-  .container,
-  .heroGrid {
-    width: min(100%, calc(100% - 16px));
+
+  .avatar {
+    width: 52px;
+    height: 52px;
   }
 }
