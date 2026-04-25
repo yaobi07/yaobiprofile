@@ -122,6 +122,7 @@
 .heroCopy {
   padding: 18px 6px 18px 0;
   position: relative;
+  overflow: visible;
 }
 
 .eyebrow {
@@ -134,10 +135,10 @@
 .heroGif {
   position: absolute;
   right: 24px;
-  top: 30%;
+  top: 50%;
   transform: translateY(-50%);
-  width: 200px;
-  height: 200px;
+  width: 360px;
+  height: 360px;
   object-fit: contain;
   pointer-events: none;
   animation: ctaBuddyBob 2.8s ease-in-out infinite;
