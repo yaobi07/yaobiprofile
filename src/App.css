@@ -117,11 +117,11 @@
   grid-template-columns: 1.18fr 0.82fr;
   gap: 28px;
   align-items: stretch;
-  position: relative;
 }
 
 .heroCopy {
   padding: 18px 6px 18px 0;
+  position: relative;
 }
 
 .eyebrow {
@@ -131,22 +131,15 @@
   letter-spacing: 0.5px;
 }
 
-.ctaRowBuddy {
-  position: absolute;
-  right: 200px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: ctaBuddyBob 2.8s ease-in-out infinite;
-  pointer-events: none;
-}
-
 .heroGif {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
   width: 120px;
   height: 120px;
   object-fit: contain;
+  pointer-events: none;
+  animation: ctaBuddyBob 2.8s ease-in-out infinite;
 }
 
 .heroInsightMotionRoot {
@@ -375,7 +368,7 @@
 }
 
 @media (max-width: 900px) {
-  .ctaRowBuddy {
+  .heroGif {
     display: none;
   }
 }

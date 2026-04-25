@@ -430,9 +430,6 @@ function App() {
         <section id="home" className="section heroSection">
           <div className="heroGrid" data-reveal>
             <div className="homeSplit">
-              <div className="ctaRowBuddy" aria-hidden="true">
-                <img className="heroGif" src="/bibi.gif" alt="" />
-              </div>
               <div className="heroCopy">
                 <p className="eyebrow">{profile.title}</p>
                 <h1 className="headline">
@@ -467,6 +464,12 @@ function App() {
                     发邮件联系
                   </a>
                 </div>
+                <img
+                  className="heroGif"
+                  src="/bibi.gif"
+                  alt=""
+                  aria-hidden="true"
+                />
               </div>
 
               <div className="capabilityStack" aria-label="能力模块">
