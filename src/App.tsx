@@ -464,7 +464,7 @@ function App() {
                     发邮件联系
                   </a>
                   <div className="ctaRowBuddy" aria-hidden="true">
-                    <img className="heroGif" src="/yaobi_orbital_tilted.gif" alt="" />
+                    <img className="heroGif" src="/bibi.gif" alt="" />
                   </div>
                 </div>
               </div>
