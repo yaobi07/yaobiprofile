@@ -131,17 +131,16 @@
 }
 
 .ctaRowBuddy {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  flex-basis: 100%;
-  margin-top: 8px;
+  flex-shrink: 0;
+  margin-left: auto;
   animation: ctaBuddyBob 2.8s ease-in-out infinite;
 }
 
 .heroGif {
-  width: 320px;
-  height: 320px;
+  width: 88px;
+  height: 88px;
   object-fit: contain;
 }
 
@@ -371,9 +370,12 @@
 }
 
 @media (max-width: 520px) {
+  .ctaRowBuddy {
+    margin-left: 0;
+  }
   .heroGif {
-    width: 160px;
-    height: 160px;
+    width: 68px;
+    height: 68px;
   }
 }
 
