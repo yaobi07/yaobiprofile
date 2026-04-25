@@ -1055,108 +1055,50 @@
 @media (max-width: 900px) {
   .container,
   .heroGrid {
-    width: min(100%, calc(100% - 32px));
+    width: min(100%, calc(100% - 24px));
   }
 
-  .heroGrid { gap: 20px; }
+  .heroGrid { gap: 16px; }
 
-  .homeSplit {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
+  .homeSplit,
   .heroCtaBand {
     grid-template-columns: 1fr;
-    gap: 14px;
   }
 
   .ctaPanel {
     flex-direction: column;
     align-items: flex-start;
-    gap: 14px;
-  }
-
-  /* 轮播：手机端图片在上，文字在下 */
-  .carousel {
-    border: 1px solid var(--border);
-    background: var(--surface);
-    box-shadow: var(--shadow-soft);
   }
 
   .carouselSlide {
     grid-template-columns: 1fr;
-    gap: 0;
+    gap: 16px;
     min-height: auto;
-    padding: 0;
   }
 
   .carouselLeft {
-    order: 2;
-    padding: 32px 28px 28px;
+    padding: 22px 12px 0;
   }
 
   .carouselRight {
-    order: 1;
-    border-radius: 0;
-    border: none;
-    box-shadow: none;
-    aspect-ratio: 16 / 9;
-    max-width: 100%;
-    justify-self: stretch;
-  }
-
-  /* 阅读区：文字在上，书封面居中在下 */
-  .section[data-carousel-id="reading"] .carouselSlide {
-    grid-template-columns: 1fr;
-  }
-
-  .section[data-carousel-id="reading"] .carouselLeft {
-    order: 1;
-    padding-bottom: 8px;
-  }
-
-  .section[data-carousel-id="reading"] .carouselRight {
-    order: 2;
-    aspect-ratio: 2 / 3;
-    max-width: 200px;
-    margin: 0 auto 20px;
-    justify-self: center;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow-soft);
-  }
-
-  /* AI 项目：全宽 16:9 图片在上 */
-  .section[data-carousel-id="projects"] .carouselSlide {
-    grid-template-columns: 1fr;
-  }
-
-  .section[data-carousel-id="projects"] .carouselRight {
-    order: 1;
-    aspect-ratio: 16 / 9;
-    max-width: 100%;
-    justify-self: stretch;
-    border-radius: 0;
-    border: none;
-    box-shadow: none;
+    border-radius: 16px;
   }
 
   .carouselControls {
-    padding: 16px 8px 8px;
-    gap: 12px;
+    padding-top: 14px;
   }
 
   .nav { gap: 6px; }
   .nav a { padding: 8px; }
 
   .sectionFrame {
-    padding: 28px;
-    border-radius: 20px;
+    border-radius: 18px;
+    padding: 20px;
   }
 
   .sectionTitle { font-size: 28px; }
 
-  .section { padding: 72px 0; }
+  .section { padding: 64px 0; }
 
   .grid { grid-template-columns: 1fr; }
 
@@ -1165,185 +1107,183 @@
     align-items: flex-start;
   }
 
-  .carouselTitle { font-size: clamp(28px, 5.5vw, 44px); }
-  .carouselDesc { font-size: 18px; }
-  .headline { font-size: clamp(34px, 7vw, 78px); }
-  .heroCard { min-width: 0; }
-  .capabilityTitle { font-size: 21px; }
+  .section[data-carousel-id="reading"] .carouselSlide,
+  .section[data-carousel-id="projects"] .carouselSlide {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .section[data-carousel-id="reading"] .carouselRight,
+  .section[data-carousel-id="projects"] .carouselRight {
+    justify-self: center;
+    width: 100%;
+    max-width: 280px;
+  }
 }
 
 /* ───── 中等手机 ≤ 640px ───── */
 @media (max-width: 640px) {
-  .container,
-  .heroGrid {
-    width: min(100%, calc(100% - 28px));
-  }
-
-  .section { padding: 62px 0; }
-  .heroSection { padding-top: 52px; }
-  .heroGrid { gap: 18px; }
-
-  /* 头像卡片：横向排列，节省空间更清晰 */
-  .heroCard {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 18px 20px;
-    border-radius: 18px;
-  }
-
-  .avatar {
-    width: 68px;
-    height: 68px;
-    flex-shrink: 0;
-    margin: 0;
-  }
-
-  .heroMeta {
-    text-align: left;
-    padding: 0;
-  }
-
-  .carouselLeft { padding: 28px 22px 24px; }
-  .carouselTitle { font-size: clamp(24px, 5.5vw, 36px); }
-  .carouselDesc { font-size: 17px; line-height: 1.68; }
-
-  .capabilityStack { gap: 10px; }
-  .capabilityTitle { font-size: 19px; }
-  .capabilityDesc { font-size: 14px; }
-
-  .ctaPanelText { font-size: 17px; }
-
-  .section[data-carousel-id="reading"] .carouselRight {
-    max-width: 180px;
-  }
-}
-
-/* ───── 小屏手机 ≤ 480px ───── */
-@media (max-width: 480px) {
-  .container,
-  .heroGrid {
-    width: min(100%, calc(100% - 24px));
-  }
+  :root { font-size: 15px; }
 
   .topbar { padding: 10px 14px; }
+
+  .brandText { font-size: 12px; }
+
   .nav { gap: 2px; }
   .nav a {
-    padding: 7px 6px;
+    letter-spacing: 0.18px;
+    padding: 6px;
     font-size: 12px;
   }
 
-  .headline {
-    font-size: clamp(26px, 8vw, 42px);
-    letter-spacing: -0.5px;
-  }
-
-  .subhead {
-    font-size: 16px;
-    margin-bottom: 14px;
-  }
-
-  .section { padding: 52px 0; }
-  .heroSection { padding-top: 40px; }
-  .heroGrid { gap: 14px; }
-
-  .sectionFrame {
-    padding: 20px;
-    border-radius: 16px;
-  }
-
-  .sectionTitle { font-size: 23px; }
-
-  .carouselLeft { padding: 24px 20px 20px; }
-
-  .carouselTitle {
-    font-size: clamp(21px, 6.5vw, 30px);
-    letter-spacing: -0.3px;
-  }
-
-  .carouselDesc {
-    font-size: 15px;
-    line-height: 1.68;
-    margin-bottom: 14px;
-  }
-
-  .carouselControls {
-    padding: 14px 8px 6px;
-    gap: 10px;
-  }
-
-  .ctaPanel {
-    padding: 18px;
-    border-radius: 18px;
-    gap: 12px;
-  }
-
-  .ctaPanelText { font-size: 15px; }
-
-  .heroCard {
-    padding: 16px 18px;
-    border-radius: 16px;
-    gap: 14px;
-  }
-
-  .avatar {
-    width: 60px;
-    height: 60px;
-  }
-
-  .capabilityCard {
-    padding: 14px 16px;
-    border-radius: 14px;
-  }
-
-  .capabilityTitle { font-size: 17px; }
-  .capabilityDesc { font-size: 13px; }
-
-  .btn {
-    font-size: 14px;
-    padding: 9px 13px;
-  }
-
-  .chip {
-    font-size: 13px;
-    padding: 6px 9px;
-  }
-
-  .section[data-carousel-id="reading"] .carouselRight {
-    max-width: 160px;
-    margin-bottom: 16px;
-  }
-}
-
-/* ───── 超小屏 ≤ 360px（iPhone SE 等） ───── */
-@media (max-width: 360px) {
   .container,
   .heroGrid {
     width: min(100%, calc(100% - 20px));
   }
+
+  .section { padding: 44px 0; }
+  .heroSection { padding-top: 36px; }
+
+  .heroCopy { padding: 8px 0 4px; }
+
+  .headline {
+    letter-spacing: -0.8px;
+    font-size: clamp(30px, 9vw, 44px);
+    line-height: 1.05;
+  }
+
+  .subhead {
+    margin: 0 0 14px;
+    font-size: 16px;
+  }
+
+  .ctaRow { gap: 10px; }
+
+  .btn {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+
+  .capabilityStack { gap: 10px; }
+
+  .capabilityCard {
+    border-radius: 14px;
+    padding: 14px;
+  }
+
+  .capabilityTitle { font-size: 19px; }
+  .capabilityDesc { font-size: 14px; }
+
+  .heroCard {
+    border-radius: 18px;
+    min-width: 0;
+    padding: 16px;
+  }
+
+  .avatar {
+    width: 104px;
+    height: 104px;
+    margin: 6px auto 8px;
+  }
+
+  .ctaPanel {
+    border-radius: 18px;
+    gap: 10px;
+    padding: 16px;
+  }
+
+  .ctaPanelText { font-size: 16px; }
+
+  .sectionFrame {
+    border-radius: 16px;
+    padding: 18px;
+  }
+
+  .sectionTitle {
+    letter-spacing: -0.3px;
+    font-size: 22px;
+  }
+
+  .sectionTitle::before {
+    margin-bottom: 6px;
+    font-size: 11px;
+  }
+
+  .sectionLead { font-size: 15px; }
+
+  .chip {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+
+  .carousel { border-radius: 18px; }
+
+  .carouselSlide {
+    gap: 14px;
+    padding: 8px 6px 0;
+  }
+
+  .carouselLeft { padding: 16px 8px 0; }
+
+  .carouselEyebrow {
+    margin: 0 0 10px;
+    font-size: 11px;
+  }
+
+  .carouselTitle {
+    letter-spacing: -0.4px;
+    margin: 0 0 10px;
+    font-size: clamp(24px, 7.2vw, 32px);
+    line-height: 1.15;
+  }
+
+  .carouselMeta {
+    margin: -2px 0 10px;
+    font-size: 14px;
+  }
+
+  .carouselDesc {
+    margin: 0 0 14px;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .carouselCta { font-size: 14px; }
+
+  .carouselRight { border-radius: 14px; }
+
+  .section[data-carousel-id="reading"] .carouselRight,
+  .section[data-carousel-id="projects"] .carouselRight {
+    max-width: 220px;
+  }
+
+  .carouselBtn {
+    width: 38px;
+    height: 38px;
+  }
+
+  .carouselControls {
+    gap: 10px;
+    padding: 14px 4px 0;
+  }
+
+  .sectionLeadAboutNoBreak,
+  .noWrap {
+    white-space: normal;
+  }
+
+  .footer { padding: 20px 0; }
+}
+
+/* ───── 超小屏 ≤ 380px（iPhone SE 等） ───── */
+@media (max-width: 380px) {
+  .headline { font-size: clamp(26px, 8.6vw, 34px); }
+  .carouselTitle { font-size: clamp(22px, 7vw, 28px); }
 
   .nav a {
     padding: 5px 4px;
     font-size: 11px;
   }
 
-  .brand { font-size: 12px; }
-
-  .brandDot {
-    width: 8px;
-    height: 8px;
-  }
-
-  .headline { font-size: clamp(22px, 7.5vw, 32px); }
-  .carouselTitle { font-size: clamp(18px, 6vw, 26px); }
-
-  .heroCard {
-    padding: 14px 16px;
-    gap: 12px;
-  }
-
-  .avatar {
-    width: 52px;
-    height: 52px;
-  }
+  .brand { gap: 8px; }
 }
