@@ -121,6 +121,7 @@
 
 .heroCopy {
   padding: 18px 6px 18px 0;
+  position: relative;
 }
 
 .eyebrow {
@@ -131,16 +132,19 @@
 }
 
 .ctaRowBuddy {
-  display: inline-flex;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
   align-items: center;
-  flex-shrink: 0;
-  margin-left: auto;
+  justify-content: center;
   animation: ctaBuddyBob 2.8s ease-in-out infinite;
 }
 
 .heroGif {
-  width: 88px;
-  height: 88px;
+  width: 130px;
+  height: 130px;
   object-fit: contain;
 }
 
@@ -369,13 +373,18 @@
   align-items: center;
 }
 
-@media (max-width: 520px) {
+@media (max-width: 900px) {
   .ctaRowBuddy {
-    margin-left: 0;
+    position: static;
+    transform: none;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 12px;
   }
+
   .heroGif {
-    width: 68px;
-    height: 68px;
+    width: 100px;
+    height: 100px;
   }
 }
 

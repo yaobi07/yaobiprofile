@@ -463,9 +463,9 @@ function App() {
                   <a className="btn" href={`mailto:${profile.contact.email}`}>
                     发邮件联系
                   </a>
-                  <div className="ctaRowBuddy" aria-hidden="true">
-                    <img className="heroGif" src="/bibi.gif" alt="" />
-                  </div>
+                </div>
+                <div className="ctaRowBuddy" aria-hidden="true">
+                  <img className="heroGif" src="/bibi.gif" alt="" />
                 </div>
               </div>
 
