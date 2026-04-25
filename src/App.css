@@ -133,11 +133,11 @@
 
 .heroGif {
   position: absolute;
-  right: 60px;
-  top: 50%;
+  right: 24px;
+  top: 30%;
   transform: translateY(-50%);
-  width: 360px;
-  height: 360px;
+  width: 200px;
+  height: 200px;
   object-fit: contain;
   pointer-events: none;
   animation: ctaBuddyBob 2.8s ease-in-out infinite;
