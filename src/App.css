@@ -134,8 +134,17 @@
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  margin-left: 6px;
+  margin-left: auto;
   animation: ctaBuddyBob 2.8s ease-in-out infinite;
+}
+
+.heroGif {
+  width: 96px;
+  height: 96px;
+  border-radius: 22px;
+  object-fit: cover;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border);
 }
 
 .heroInsightMotionRoot {

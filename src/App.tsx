@@ -4,7 +4,6 @@ import coverTestaments from '../camera/证言.jpg'
 import coverHiddenCorner from '../camera/隐秘的角落.jpg'
 import coverSexRights from '../camera/性权利.jpg'
 import profileAvatar from '../camera/个人头像.jpg'
-import { HeroInsightMotion } from './components/HeroInsightMotion'
 
 type Project = {
   name: string
@@ -465,7 +464,7 @@ function App() {
                     发邮件联系
                   </a>
                   <div className="ctaRowBuddy" aria-hidden="true">
-                    <HeroInsightMotion />
+                    <img className="heroGif" src="/yaobi_orbital_tilted.gif" alt="" />
                   </div>
                 </div>
               </div>
