@@ -117,11 +117,11 @@
   grid-template-columns: 1.18fr 0.82fr;
   gap: 28px;
   align-items: stretch;
+  position: relative;
 }
 
 .heroCopy {
   padding: 18px 6px 18px 0;
-  position: relative;
 }
 
 .eyebrow {
@@ -133,18 +133,19 @@
 
 .ctaRowBuddy {
   position: absolute;
-  right: 0;
+  right: 200px;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
   animation: ctaBuddyBob 2.8s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .heroGif {
-  width: 130px;
-  height: 130px;
+  width: 120px;
+  height: 120px;
   object-fit: contain;
 }
 
@@ -375,16 +376,7 @@
 
 @media (max-width: 900px) {
   .ctaRowBuddy {
-    position: static;
-    transform: none;
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 12px;
-  }
-
-  .heroGif {
-    width: 100px;
-    height: 100px;
+    display: none;
   }
 }
 
