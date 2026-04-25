@@ -1106,4 +1106,175 @@
     flex-direction: column;
     align-items: flex-start;
   }
+  /* 修复 CSS 特异性：让 reading/projects 轮播在手机上也能正确单列排列 */
+  .section[data-carousel-id="reading"] .carouselSlide,
+  .section[data-carousel-id="projects"] .carouselSlide {
+    grid-template-columns: 1fr;
+  }
+  .section[data-carousel-id="reading"] .carouselRight {
+    aspect-ratio: 2 / 3;
+    max-width: min(260px, 65%);
+    margin: 0 auto;
+    justify-self: center;
+  }
+  .section[data-carousel-id="projects"] .carouselRight {
+    aspect-ratio: 16 / 9;
+    max-width: 100%;
+    justify-self: stretch;
+  }
+  /* 缩小轮播字体 */
+  .carouselTitle {
+    font-size: clamp(26px, 5.5vw, 40px);
+  }
+  .carouselDesc {
+    font-size: 17px;
+  }
+  /* 收敛主标题尺寸 */
+  .headline {
+    font-size: clamp(32px, 7vw, 78px);
+  }
+  /* 去除 heroCard 的固定最小宽度，防止溢出 */
+  .heroCard {
+    min-width: 0;
+  }
+  /* 能力卡片标题缩小 */
+  .capabilityTitle {
+    font-size: 20px;
+  }
+}
+
+/* 中等手机：≤ 640px */
+@media (max-width: 640px) {
+  .section {
+    padding: 56px 0;
+  }
+  .heroSection {
+    padding-top: 48px;
+  }
+  .carouselTitle {
+    font-size: clamp(22px, 5.5vw, 32px);
+  }
+  .carouselDesc {
+    font-size: 16px;
+  }
+  .capabilityTitle {
+    font-size: 18px;
+  }
+  .capabilityDesc {
+    font-size: 14px;
+  }
+  .heroCtaBand {
+    gap: 10px;
+  }
+  .ctaPanelText {
+    font-size: 16px;
+  }
+}
+
+/* 小屏手机：≤ 480px */
+@media (max-width: 480px) {
+  .topbar {
+    padding: 10px 12px;
+  }
+  .nav {
+    gap: 2px;
+  }
+  .nav a {
+    padding: 6px 5px;
+    font-size: 12px;
+  }
+  .headline {
+    font-size: clamp(26px, 8vw, 42px);
+    letter-spacing: -0.6px;
+  }
+  .subhead {
+    font-size: 16px;
+    margin-bottom: 14px;
+  }
+  .section {
+    padding: 44px 0;
+  }
+  .heroSection {
+    padding-top: 36px;
+  }
+  .heroGrid {
+    gap: 12px;
+  }
+  .sectionFrame {
+    padding: 14px;
+    border-radius: 14px;
+  }
+  .sectionTitle {
+    font-size: 22px;
+  }
+  .carouselLeft {
+    padding: 14px 8px 0;
+  }
+  .carouselTitle {
+    font-size: clamp(20px, 6.5vw, 28px);
+    letter-spacing: -0.3px;
+  }
+  .carouselDesc {
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+  .carouselControls {
+    padding-top: 10px;
+    gap: 10px;
+  }
+  .ctaPanel {
+    padding: 14px;
+    border-radius: 16px;
+    gap: 10px;
+  }
+  .ctaPanelText {
+    font-size: 15px;
+  }
+  .heroCard {
+    padding: 14px;
+    border-radius: 16px;
+  }
+  .capabilityCard {
+    padding: 12px;
+    border-radius: 12px;
+  }
+  .capabilityTitle {
+    font-size: 16px;
+  }
+  .capabilityDesc {
+    font-size: 13px;
+  }
+  .btn {
+    font-size: 14px;
+    padding: 9px 13px;
+  }
+  .chip {
+    font-size: 13px;
+    padding: 6px 9px;
+  }
+}
+
+/* 超小屏：≤ 360px（iPhone SE 等） */
+@media (max-width: 360px) {
+  .nav a {
+    padding: 5px 4px;
+    font-size: 11px;
+  }
+  .brand {
+    font-size: 12px;
+  }
+  .brandDot {
+    width: 8px;
+    height: 8px;
+  }
+  .headline {
+    font-size: clamp(22px, 7.5vw, 32px);
+  }
+  .carouselTitle {
+    font-size: clamp(18px, 6vw, 26px);
+  }
+  .container,
+  .heroGrid {
+    width: min(100%, calc(100% - 16px));
+  }
 }
