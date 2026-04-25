@@ -1,5 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
+import coverTestaments from '../camera/证言.jpg'
+import coverHiddenCorner from '../camera/隐秘的角落.jpg'
+import coverSexRights from '../camera/性权利.jpg'
+import profileAvatar from '../camera/个人头像.jpg'
+import { HeroInsightMotion } from './components/HeroInsightMotion'
 
 type Project = {
   name: string
@@ -12,6 +17,7 @@ type Project = {
 type CarouselItem = {
   eyebrow: string
   title: string
+  meta?: string
   description: string
   image: string
   href: string
@@ -51,8 +57,7 @@ const profile = {
 const projects: Project[] = [
   {
     name: '亚马逊购物篮分析及可视化项目',
-    image:
-      'https://image.thum.io/get/width/1200/crop/675/noanimate/https://basketanalysis-yabijongjiongjiong.netlify.app/',
+    image: '/ai-basket-network.svg',
     description:
       '对亚马逊购物篮分析的原始数据进行赋分排序，识别高频组合购买的商品对。',
     techStack: ['数据清洗', '赋分排序', '可视化分析'],
@@ -65,8 +70,7 @@ const projects: Project[] = [
   },
   {
     name: '亚马逊用户画像分析',
-    image:
-      'https://image.thum.io/get/width/1200/crop/675/noanimate/https://user-persona-visualization-xiaban.netlify.app/',
+    image: '/ai-user-persona.svg',
     description: '对亚马逊用户画像分析的原始数据进行可视化呈现。',
     techStack: ['用户画像', '数据可视化', '分析看板'],
     links: [
@@ -134,24 +138,27 @@ const writingArticles: Project[] = [
 
 const recentBooks: Project[] = [
   {
-    name: '书名示例 1',
-    image: '/project-1.svg',
-    description: '在这里写这本书最打动你的观点，以及它如何影响你的思考。',
-    techStack: ['阅读笔记', '思辨'],
+    name: '《证言》',
+    image: coverTestaments,
+    description:
+      '故事发生在《使女的故事》结局十五年后：基列国的极权统治在内部逐渐显露出裂痕。三位出身不同、却被同一体制塑形的女性共同叙述，层层揭开基列国倾覆背后的真相。',
+    techStack: ['阅读笔记', '叙事/政治'],
     links: [{ label: '查看笔记', href: '#' }],
   },
   {
-    name: '书名示例 2',
-    image: '/project-2.svg',
-    description: '在这里写你对作者观点的理解与延展。',
-    techStack: ['观点', '方法'],
+    name: '《隐秘的角落》',
+    image: coverHiddenCorner,
+    description:
+      '本书聚焦网络“厌女男性”社群的形成与扩散。作者以卧底与访谈的方式追踪仇恨叙事如何在圈层内部强化，并逐步渗透到现实冲突中，进而讨论如何拆解厌女叙事、重建公共对话。',
+    techStack: ['阅读笔记', '社会观察'],
     links: [{ label: '查看笔记', href: '#' }],
   },
   {
-    name: '书名示例 3',
-    image: '/project-3.svg',
-    description: '在这里写阅读后的问题意识与下一步阅读计划。',
-    techStack: ['书单', '持续更新'],
+    name: '《性权利：21世纪的女权主义》',
+    image: coverSexRights,
+    description:
+      '所有只关注相关群体内部成员的解放运动——只关注女性的女权主义运动、只关注有色人种的反种族歧视运动、只关注工人阶级的劳工运动——都有一个共同点：此类运动只能最好地服务那些群体内部受压迫程度最轻的成员。',
+    techStack: ['阅读笔记', '理论/伦理'],
     links: [{ label: '查看笔记', href: '#' }],
   },
 ]
@@ -203,7 +210,7 @@ function CarouselSection({
   }
 
   return (
-    <section id={id} className="section" aria-label={ariaLabel}>
+    <section id={id} className="section" aria-label={ariaLabel} data-carousel-id={id}>
       <div className="container" data-reveal>
         <div
           className="carousel"
@@ -233,6 +240,7 @@ function CarouselSection({
                   <a className="carouselTitleLink" href={item.href} target="_blank" rel="noreferrer">
                     <h2 className="carouselTitle">{item.title}</h2>
                   </a>
+                  {item.meta ? <p className="carouselMeta">{item.meta}</p> : null}
                   <p className="carouselDesc">{item.description}</p>
                   <a className="carouselCta" href={item.href} target="_blank" rel="noreferrer">
                     {item.ctaLabel} <span aria-hidden="true">→</span>
@@ -329,13 +337,84 @@ function App() {
   useEffect(() => setupRevealOnScroll(), [])
   const [meritToasts, setMeritToasts] = useState<Array<{ id: string }>>([])
   const toastTimeoutMs = 900
-  const toastIdPrefix = useMemo(
-    () => `${Math.random().toString(16).slice(2)}-${Date.now().toString(16)}`,
-    [],
-  )
+  // Toast id only needs to be stable across the component lifetime; uniqueness comes from `performance.now()`.
+  const toastIdPrefix = useMemo(() => 'toast', [])
+  const trailCanvasRef = useRef<HTMLCanvasElement | null>(null)
+
+  useEffect(() => {
+    const canvas = trailCanvasRef.current
+    if (!canvas) return
+    if (typeof window === 'undefined') return
+
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    const dpr = Math.max(1, window.devicePixelRatio || 1)
+    const points: Array<{ x: number; y: number; t: number }> = []
+    const maxAgeMs = 550
+
+    const resize = () => {
+      const w = window.innerWidth
+      const h = window.innerHeight
+      canvas.width = Math.floor(w * dpr)
+      canvas.height = Math.floor(h * dpr)
+      canvas.style.width = `${w}px`
+      canvas.style.height = `${h}px`
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+    }
+
+    resize()
+
+    let raf = 0
+    const draw = () => {
+      raf = requestAnimationFrame(draw)
+      const now = performance.now()
+
+      // prune
+      while (points.length && now - points[0].t > maxAgeMs) points.shift()
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      if (points.length < 2) return
+
+      ctx.lineCap = 'round'
+      ctx.lineJoin = 'round'
+
+      for (let i = 1; i < points.length; i++) {
+        const a = points[i - 1]!
+        const b = points[i]!
+        const age = now - b.t
+        const alpha = Math.max(0, 1 - age / maxAgeMs)
+        const width = 1.5 + 3.5 * alpha
+        ctx.strokeStyle = `rgba(197, 20, 20, ${0.75 * alpha})`
+        ctx.lineWidth = width
+        ctx.beginPath()
+        ctx.moveTo(a.x, a.y)
+        ctx.lineTo(b.x, b.y)
+        ctx.stroke()
+      }
+    }
+
+    const onMove = (e: PointerEvent) => {
+      const now = performance.now()
+      points.push({ x: e.clientX, y: e.clientY, t: now })
+      // limit density
+      if (points.length > 90) points.splice(0, points.length - 90)
+    }
+
+    window.addEventListener('resize', resize)
+    window.addEventListener('pointermove', onMove, { passive: true })
+    raf = requestAnimationFrame(draw)
+
+    return () => {
+      window.removeEventListener('resize', resize)
+      window.removeEventListener('pointermove', onMove)
+      cancelAnimationFrame(raf)
+    }
+  }, [])
 
   return (
     <div className="page">
+      <canvas ref={trailCanvasRef} className="cursorTrail" aria-hidden="true" />
       <header className="topbar">
         <a className="brand" href="#home" aria-label="回到首页">
           <span className="brandDot" aria-hidden="true" />
@@ -385,6 +464,9 @@ function App() {
                   <a className="btn" href={`mailto:${profile.contact.email}`}>
                     发邮件联系
                   </a>
+                  <div className="ctaRowBuddy" aria-hidden="true">
+                    <HeroInsightMotion />
+                  </div>
                 </div>
               </div>
 
@@ -401,7 +483,7 @@ function App() {
             <div className="heroCtaBand">
               <div className="heroCard" aria-label="头像卡片">
                 <div className="avatar">
-                  <img src="/avatar.jpg" alt={profile.avatarAlt} width={132} height={132} />
+                  <img src={profileAvatar} alt={profile.avatarAlt} width={132} height={132} />
                 </div>
                 <div className="heroMeta">
                   <div className="metaName">{profile.name}</div>
@@ -423,9 +505,9 @@ function App() {
 
         <section id="about" className="section" aria-label="关于我">
           <div className="container sectionFrame" data-reveal>
-            <h2 className="sectionTitle">关于我</h2>
-            <p className="sectionLead">
-              我专注于将业务原始数据转化为可解释、可决策的可视化结果，结合写作能力输出清晰的分析报告。
+            <h2 className="sectionTitle sectionTitleAbout">关于我</h2>
+            <p className="sectionLead sectionLeadAboutNoBreak">
+              我专注于将业务原始数据转化为可解释、可决策的可视化结果，结合写作能力输出清晰的<span className="noWrap">分析报告</span>。
             </p>
             <div className="chips">
               {profile.skills.map((s) => (
@@ -469,6 +551,14 @@ function App() {
           items={recentBooks.slice(0, 3).map((p) => ({
             eyebrow: '阅读即世界',
             title: p.name,
+            meta:
+              p.name === '《证言》'
+                ? '玛格丽特·阿特伍德'
+                : p.name === '《隐秘的角落》'
+                  ? '劳拉·贝茨'
+                  : p.name === '《性权利：21世纪的女权主义》'
+                    ? '埃米娅·斯里尼瓦桑'
+                    : undefined,
             description: p.description,
             image: p.image,
             href: p.links[0]?.href ?? '#',

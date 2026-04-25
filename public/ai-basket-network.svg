@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1080" viewBox="0 0 720 1080" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="720" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0A1020"/>
+      <stop offset="1" stop-color="#111B2F"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="140" y1="160" x2="640" y2="940" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#60A5FA" stop-opacity="0.70"/>
+      <stop offset="0.55" stop-color="#22D3EE" stop-opacity="0.62"/>
+      <stop offset="1" stop-color="#F59E0B" stop-opacity="0.55"/>
+    </linearGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="14" result="b"/>
+      <feColorMatrix in="b" type="matrix"
+        values="1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                0 0 0 .32 0" result="c"/>
+      <feMerge>
+        <feMergeNode in="c"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="720" height="1080" rx="56" fill="url(#bg)"/>
+  <rect x="36" y="48" width="648" height="984" rx="44" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.10)"/>
+
+  <!-- network glow -->
+  <circle cx="240" cy="340" r="120" fill="rgba(34,211,238,0.08)" filter="url(#soft)"/>
+  <circle cx="520" cy="720" r="160" fill="rgba(245,158,11,0.07)" filter="url(#soft)"/>
+
+  <!-- graph links -->
+  <g stroke="url(#accent)" stroke-width="10" stroke-linecap="round" opacity="0.92">
+    <path d="M210 420L330 360"/>
+    <path d="M330 360L470 410"/>
+    <path d="M210 420L250 560"/>
+    <path d="M250 560L380 530"/>
+    <path d="M380 530L520 600"/>
+    <path d="M470 410L520 600"/>
+    <path d="M380 530L330 680"/>
+    <path d="M330 680L470 760"/>
+    <path d="M250 560L210 720"/>
+    <path d="M210 720L330 680"/>
+    <path d="M520 600L470 760"/>
+  </g>
+
+  <!-- nodes -->
+  <g>
+    <circle cx="210" cy="420" r="34" fill="rgba(96,165,250,0.22)" stroke="rgba(96,165,250,0.75)" stroke-width="4"/>
+    <circle cx="330" cy="360" r="34" fill="rgba(34,211,238,0.20)" stroke="rgba(34,211,238,0.70)" stroke-width="4"/>
+    <circle cx="470" cy="410" r="34" fill="rgba(167,139,250,0.18)" stroke="rgba(167,139,250,0.62)" stroke-width="4"/>
+    <circle cx="250" cy="560" r="34" fill="rgba(34,211,238,0.18)" stroke="rgba(34,211,238,0.64)" stroke-width="4"/>
+    <circle cx="380" cy="530" r="34" fill="rgba(96,165,250,0.18)" stroke="rgba(96,165,250,0.62)" stroke-width="4"/>
+    <circle cx="520" cy="600" r="34" fill="rgba(245,158,11,0.16)" stroke="rgba(245,158,11,0.58)" stroke-width="4"/>
+    <circle cx="330" cy="680" r="34" fill="rgba(167,139,250,0.16)" stroke="rgba(167,139,250,0.55)" stroke-width="4"/>
+    <circle cx="470" cy="760" r="34" fill="rgba(34,211,238,0.16)" stroke="rgba(34,211,238,0.55)" stroke-width="4"/>
+    <circle cx="210" cy="720" r="34" fill="rgba(96,165,250,0.16)" stroke="rgba(96,165,250,0.55)" stroke-width="4"/>
+  </g>
+
+  <!-- basket icon in a node (simple) -->
+  <g transform="translate(210 420)">
+    <g transform="translate(-14 -12)" stroke="rgba(255,255,255,0.68)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+      <path d="M4 10h24l-3 18H7L4 10Z" fill="rgba(255,255,255,0.06)"/>
+      <path d="M9 10l7-8 7 8"/>
+      <path d="M10 16h12"/>
+      <path d="M11 21h10"/>
+    </g>
+  </g>
+
+  <!-- micro charts (no text) -->
+  <g opacity="0.9">
+    <g transform="translate(118,860)">
+      <rect x="0" y="0" width="210" height="90" rx="18" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.10)"/>
+      <path d="M26 64c22-26 42-40 64-24s34 10 52-14 34-18 48-4" stroke="url(#accent)" stroke-width="8" stroke-linecap="round" fill="none"/>
+    </g>
+    <g transform="translate(408,860)">
+      <rect x="0" y="0" width="194" height="90" rx="18" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.10)"/>
+      <path d="M30 70V42" stroke="rgba(34,211,238,0.60)" stroke-width="10" stroke-linecap="round"/>
+      <path d="M66 70V30" stroke="rgba(96,165,250,0.60)" stroke-width="10" stroke-linecap="round"/>
+      <path d="M102 70V50" stroke="rgba(167,139,250,0.55)" stroke-width="10" stroke-linecap="round"/>
+      <path d="M138 70V24" stroke="rgba(245,158,11,0.52)" stroke-width="10" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>
+

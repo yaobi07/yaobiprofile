@@ -4,6 +4,14 @@
   isolation: isolate;
 }
 
+.cursorTrail {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
 .page::before {
   content: "";
   position: fixed;
@@ -122,6 +130,209 @@
   letter-spacing: 0.5px;
 }
 
+.ctaRowBuddy {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: 6px;
+  animation: ctaBuddyBob 2.8s ease-in-out infinite;
+}
+
+.heroInsightMotionRoot {
+  position: relative;
+  width: 96px;
+}
+
+.heroInsightCanvas {
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+  background: var(--surface);
+  aspect-ratio: 140 / 118;
+}
+
+.heroInsightScene {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hi-mascot {
+  transform-origin: 70px 88px;
+  transform-box: fill-box;
+  animation: hi-mascot-bounce 1.9s ease-in-out infinite;
+}
+
+.hi-arm-wave {
+  transform-origin: 88px 76px;
+  transform-box: fill-box;
+  animation: hi-wave-arm 0.95s ease-in-out infinite;
+}
+
+.hi-eye-l {
+  transform-origin: 60px 52px;
+  transform-box: fill-box;
+  animation: hi-blink 4.8s infinite;
+}
+
+.hi-eye-r {
+  transform-origin: 80px 52px;
+  transform-box: fill-box;
+  animation: hi-blink 4.8s 0.04s infinite;
+}
+
+.hi-smile {
+  transform-origin: 70px 62px;
+  transform-box: fill-box;
+  animation: hi-smile-wiggle 2.6s ease-in-out infinite;
+}
+
+.hi-blush-l {
+  animation: hi-blush-pop 2.2s ease-in-out infinite;
+}
+
+.hi-blush-r {
+  animation: hi-blush-pop 2.2s 0.35s ease-in-out infinite;
+}
+
+.hi-star-a {
+  transform-origin: 24px 32px;
+  transform-box: fill-box;
+  animation: hi-star-twinkle 2.4s ease-in-out infinite;
+}
+
+.hi-star-b {
+  transform-origin: 120px 26px;
+  transform-box: fill-box;
+  animation: hi-star-twinkle 2.8s 0.5s ease-in-out infinite;
+}
+
+.hi-dot-pulse {
+  animation: hi-dot-pulse 1.8s ease-in-out infinite;
+}
+
+.hi-shadow {
+  animation: hi-shadow-breathe 1.9s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ctaRowBuddy,
+  .hi-mascot,
+  .hi-arm-wave,
+  .hi-eye-l,
+  .hi-eye-r,
+  .hi-smile,
+  .hi-blush-l,
+  .hi-blush-r,
+  .hi-star-a,
+  .hi-star-b,
+  .hi-dot-pulse,
+  .hi-shadow {
+    animation: none;
+  }
+}
+
+@keyframes ctaBuddyBob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes hi-mascot-bounce {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(1.5deg);
+  }
+}
+
+@keyframes hi-wave-arm {
+  0%,
+  100% {
+    transform: rotate(-6deg);
+  }
+  50% {
+    transform: rotate(22deg);
+  }
+}
+
+@keyframes hi-blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  94% {
+    transform: scaleY(0.12);
+  }
+  96% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes hi-smile-wiggle {
+  0%,
+  100% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(1.06);
+  }
+}
+
+@keyframes hi-blush-pop {
+  0%,
+  100% {
+    opacity: 0.28;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes hi-star-twinkle {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.15) rotate(12deg);
+    opacity: 1;
+  }
+}
+
+@keyframes hi-dot-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0.75;
+  }
+}
+
+@keyframes hi-shadow-breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scaleX(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scaleX(1.08);
+  }
+}
+
 .headline {
   margin: 0 0 14px;
   font-size: clamp(40px, 4.3vw, 78px);
@@ -150,6 +361,15 @@
   flex-wrap: wrap;
   gap: 12px;
   align-items: center;
+}
+
+@media (max-width: 520px) {
+  .ctaRowBuddy {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 4px;
+    justify-content: flex-end;
+  }
 }
 
 .btn {
@@ -262,6 +482,13 @@
   margin: 12px auto 10px;
   position: relative;
   z-index: 1;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .heroMeta {
@@ -397,6 +624,14 @@
   text-wrap: balance;
 }
 
+.carouselMeta {
+  margin: -4px 0 14px;
+  color: var(--muted);
+  font-weight: 650;
+  font-size: 16px;
+  letter-spacing: 0.2px;
+}
+
 .carouselDesc {
   margin: 0 0 18px;
   color: var(--text);
@@ -444,6 +679,45 @@
   transform: scale(1.02);
   transition: transform 550ms ease;
   filter: saturate(1.03) contrast(1.02);
+}
+
+/* 仅《阅读即世界》使用书封面窄比例 + 自适应显示 */
+.section[data-carousel-id="reading"] .carouselSlide {
+  grid-template-columns: 1.14fr 0.86fr;
+  gap: 28px;
+}
+
+.section[data-carousel-id="reading"] .carouselRight {
+  aspect-ratio: 2 / 3;
+  max-width: 360px;
+  justify-self: end;
+}
+
+.section[data-carousel-id="reading"] .carouselImg {
+  object-fit: cover;
+  background: transparent;
+}
+
+/* AI 项目：让封面大小与《阅读即世界》一致 */
+.section[data-carousel-id="projects"] .carouselSlide {
+  grid-template-columns: 1.14fr 0.86fr;
+  gap: 28px;
+}
+
+.section[data-carousel-id="projects"] .carouselRight {
+  aspect-ratio: 2 / 3;
+  max-width: 360px;
+  justify-self: end;
+}
+
+.section[data-carousel-id="projects"] .carouselImg {
+  object-fit: cover;
+  background: transparent;
+}
+
+.section[data-carousel-id="reading"] .carouselRight,
+.section[data-carousel-id="projects"] .carouselRight {
+  background: transparent;
 }
 
 .carouselRight:hover .carouselImg {
@@ -588,11 +862,25 @@
   color: var(--muted);
 }
 
+.sectionTitleAbout::before {
+  content: "About me";
+}
+
 .sectionLead {
   width: 100%;
   margin: 0 0 18px;
   color: var(--muted);
   max-width: 72ch;
+}
+
+.noWrap {
+  white-space: nowrap;
+}
+
+@media (min-width: 900px) {
+  .sectionLeadAboutNoBreak {
+    white-space: nowrap;
+  }
 }
 
 .chips {
