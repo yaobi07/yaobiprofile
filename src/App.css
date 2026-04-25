@@ -135,7 +135,7 @@
 .heroGif {
   position: absolute;
   right: 24px;
-  top: 50%;
+  top: 35%;
   transform: translateY(-50%);
   width: 360px;
   height: 360px;
