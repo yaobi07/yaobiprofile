@@ -142,10 +142,7 @@
 .heroGif {
   width: 140px;
   height: 140px;
-  border-radius: 28px;
-  object-fit: cover;
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border);
+  object-fit: contain;
 }
 
 .heroInsightMotionRoot {
