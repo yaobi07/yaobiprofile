@@ -869,6 +869,10 @@
   content: "About me";
 }
 
+.sectionTitleContact::before {
+  content: "Contact";
+}
+
 .sectionLead {
   width: 100%;
   margin: 0 0 18px;

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import coverTestaments from '../camera/证言.jpg'
 import coverHiddenCorner from '../camera/隐秘的角落.jpg'
@@ -11,6 +11,7 @@ type Project = {
   description: string
   techStack: string[]
   links: { label: string; href: string }[]
+  author?: string
 }
 
 type CarouselItem = {
@@ -19,7 +20,7 @@ type CarouselItem = {
   meta?: string
   description: string
   image: string
-  href: string
+  href?: string
   ctaLabel: string
 }
 
@@ -79,13 +80,6 @@ const projects: Project[] = [
       },
     ],
   },
-  {
-    name: '更多项目筹备中',
-    image: '/project-3.svg',
-    description: '后续会继续补充更多实战项目与案例。',
-    techStack: ['持续更新'],
-    links: [{ label: '敬请期待', href: '#projects' }],
-  },
 ]
 
 const homeCapabilities: CapabilityModule[] = [
@@ -138,27 +132,30 @@ const writingArticles: Project[] = [
 const recentBooks: Project[] = [
   {
     name: '《证言》',
+    author: '玛格丽特·阿特伍德',
     image: coverTestaments,
     description:
       '故事发生在《使女的故事》结局十五年后：基列国的极权统治在内部逐渐显露出裂痕。三位出身不同、却被同一体制塑形的女性共同叙述，层层揭开基列国倾覆背后的真相。',
     techStack: ['阅读笔记', '叙事/政治'],
-    links: [{ label: '查看笔记', href: '#' }],
+    links: [],
   },
   {
     name: '《隐秘的角落》',
+    author: '劳拉·贝茨',
     image: coverHiddenCorner,
     description:
-      '本书聚焦网络“厌女男性”社群的形成与扩散。作者以卧底与访谈的方式追踪仇恨叙事如何在圈层内部强化，并逐步渗透到现实冲突中，进而讨论如何拆解厌女叙事、重建公共对话。',
+      '本书聚焦网络”厌女男性”社群的形成与扩散。作者以卧底与访谈的方式追踪仇恨叙事如何在圈层内部强化，并逐步渗透到现实冲突中，进而讨论如何拆解厌女叙事、重建公共对话。',
     techStack: ['阅读笔记', '社会观察'],
-    links: [{ label: '查看笔记', href: '#' }],
+    links: [],
   },
   {
     name: '《性权利：21世纪的女权主义》',
+    author: '埃米娅·斯里尼瓦桑',
     image: coverSexRights,
     description:
       '所有只关注相关群体内部成员的解放运动——只关注女性的女权主义运动、只关注有色人种的反种族歧视运动、只关注工人阶级的劳工运动——都有一个共同点：此类运动只能最好地服务那些群体内部受压迫程度最轻的成员。',
     techStack: ['阅读笔记', '理论/伦理'],
-    links: [{ label: '查看笔记', href: '#' }],
+    links: [],
   },
 ]
 
@@ -236,18 +233,30 @@ function CarouselSection({
               <article key={item.title} className="carouselSlide">
                 <div className="carouselLeft">
                   <p className="carouselEyebrow">{item.eyebrow}</p>
-                  <a className="carouselTitleLink" href={item.href} target="_blank" rel="noreferrer">
+                  {item.href ? (
+                    <a className="carouselTitleLink" href={item.href} target="_blank" rel="noreferrer">
+                      <h2 className="carouselTitle">{item.title}</h2>
+                    </a>
+                  ) : (
                     <h2 className="carouselTitle">{item.title}</h2>
-                  </a>
+                  )}
                   {item.meta ? <p className="carouselMeta">{item.meta}</p> : null}
                   <p className="carouselDesc">{item.description}</p>
-                  <a className="carouselCta" href={item.href} target="_blank" rel="noreferrer">
-                    {item.ctaLabel} <span aria-hidden="true">→</span>
-                  </a>
+                  {item.href && (
+                    <a className="carouselCta" href={item.href} target="_blank" rel="noreferrer">
+                      {item.ctaLabel} <span aria-hidden="true">→</span>
+                    </a>
+                  )}
                 </div>
-                <a className="carouselRight" href={item.href} target="_blank" rel="noreferrer" aria-label={`打开：${item.title}`}>
-                  <img className="carouselImg" src={item.image} alt="" loading="lazy" />
-                </a>
+                {item.href ? (
+                  <a className="carouselRight" href={item.href} target="_blank" rel="noreferrer" aria-label={`打开：${item.title}`}>
+                    <img className="carouselImg" src={item.image} alt="" loading="lazy" />
+                  </a>
+                ) : (
+                  <div className="carouselRight">
+                    <img className="carouselImg" src={item.image} alt="" loading="lazy" />
+                  </div>
+                )}
               </article>
             ))}
           </div>
@@ -336,8 +345,6 @@ function App() {
   useEffect(() => setupRevealOnScroll(), [])
   const [meritToasts, setMeritToasts] = useState<Array<{ id: string }>>([])
   const toastTimeoutMs = 900
-  // Toast id only needs to be stable across the component lifetime; uniqueness comes from `performance.now()`.
-  const toastIdPrefix = useMemo(() => 'toast', [])
   const trailCanvasRef = useRef<HTMLCanvasElement | null>(null)
 
   useEffect(() => {
@@ -421,7 +428,9 @@ function App() {
         </a>
         <nav className="nav">
           <a href="#about">关于我</a>
+          <a href="#writing">写作</a>
           <a href="#projects">项目</a>
+          <a href="#reading">阅读</a>
           <a href="#contact">联系</a>
         </nav>
       </header>
@@ -443,7 +452,7 @@ function App() {
                       className="btn primary"
                       type="button"
                       onClick={() => {
-                        const id = `${toastIdPrefix}-${performance.now().toFixed(3)}`
+                        const id = `toast-${performance.now().toFixed(3)}`
                         setMeritToasts((prev) => [...prev, { id }])
                         window.setTimeout(() => {
                           setMeritToasts((prev) => prev.filter((t) => t.id !== id))
@@ -537,7 +546,7 @@ function App() {
         <CarouselSection
           id="projects"
           ariaLabel="AI项目"
-          items={projects.slice(0, 3).map((p) => ({
+          items={projects.slice(0, 2).map((p) => ({
             eyebrow: 'AI项目',
             title: p.name,
             description: p.description,
@@ -553,24 +562,17 @@ function App() {
           items={recentBooks.slice(0, 3).map((p) => ({
             eyebrow: '阅读即世界',
             title: p.name,
-            meta:
-              p.name === '《证言》'
-                ? '玛格丽特·阿特伍德'
-                : p.name === '《隐秘的角落》'
-                  ? '劳拉·贝茨'
-                  : p.name === '《性权利：21世纪的女权主义》'
-                    ? '埃米娅·斯里尼瓦桑'
-                    : undefined,
+            meta: p.author,
             description: p.description,
             image: p.image,
-            href: p.links[0]?.href ?? '#',
+            href: p.links[0]?.href,
             ctaLabel: '查看笔记',
           }))}
         />
 
         <section id="contact" className="section" aria-label="联系方式">
           <div className="container sectionFrame" data-reveal>
-            <h2 className="sectionTitle">联系我</h2>
+            <h2 className="sectionTitle sectionTitleContact">联系我</h2>
             <p className="sectionLead">
               邮箱：{' '}
               <a className="inlineLink" href={`mailto:${profile.contact.email}`}>
