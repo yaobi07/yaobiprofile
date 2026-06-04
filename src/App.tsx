@@ -316,12 +316,6 @@ function App() {
                     发邮件联系
                   </a>
                 </div>
-                <img
-                  className="heroGif"
-                  src="/bibi.gif"
-                  alt=""
-                  aria-hidden="true"
-                />
               </div>
 
               <div className="capabilityStack" aria-label="能力模块">

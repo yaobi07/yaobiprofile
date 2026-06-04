@@ -133,19 +133,6 @@
   letter-spacing: 0.5px;
 }
 
-.heroGif {
-  position: absolute;
-  right: -20px;
-  top: -30px;
-  width: 480px;
-  height: 480px;
-  object-fit: contain;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.9;
-  animation: ctaBuddyBob 2.8s ease-in-out infinite;
-}
-
 /* 文字层浮在 GIF 上方 */
 .eyebrow,
 .headline,
@@ -380,11 +367,6 @@
   align-items: center;
 }
 
-@media (max-width: 900px) {
-  .heroGif {
-    display: none;
-  }
-}
 
 .btn {
   display: inline-flex;
