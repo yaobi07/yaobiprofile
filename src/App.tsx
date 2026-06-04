@@ -14,16 +14,6 @@ type Project = {
   author?: string
 }
 
-type CarouselItem = {
-  eyebrow: string
-  title: string
-  meta?: string
-  description: string
-  image: string
-  href?: string
-  ctaLabel: string
-}
-
 type CapabilityModule = {
   title: string
   subtitle: string
@@ -112,10 +102,10 @@ const writingArticles: Project[] = [
     links: [{ label: '阅读文章', href: 'https://mp.weixin.qq.com/s/f6at7XM9MBYkZ8kH26S0Pw' }],
   },
   {
-    name: '到达 | 作为母亲晒“孕肚”，反而更“去人性”？',
+    name: '到达 | 作为母亲晒"孕肚"，反而更"去人性"？',
     image: '/writing-cover-2.png',
     description:
-      '这种歌颂带来的，可能只是被架空的“英雄”形象，无需人性，只需生产。',
+      '这种歌颂带来的，可能只是被架空的"英雄"形象，无需人性，只需生产。',
     techStack: ['明听影思', '到达', '母职'],
     links: [{ label: '阅读文章', href: 'https://mp.weixin.qq.com/s/SniRMS2rkwg7xj6-BpdEBQ' }],
   },
@@ -123,7 +113,7 @@ const writingArticles: Project[] = [
     name: '自由戏 | 一聊黄的就不痛了，我们是在性解放吗？',
     image: '/writing-cover-3.png',
     description:
-      '如果“一聊黄就不痛了”，那么真正值得警惕的，也许不是痛的消失，而是我们失去了面对它的语言。',
+      '如果"一聊黄就不痛了"，那么真正值得警惕的，也许不是痛的消失，而是我们失去了面对它的语言。',
     techStack: ['明听影思', '自由戏', '性政治'],
     links: [{ label: '阅读文章', href: 'https://mp.weixin.qq.com/s/ExQ1EwGYoEiSDK6lyqcK2A' }],
   },
@@ -144,7 +134,7 @@ const recentBooks: Project[] = [
     author: '劳拉·贝茨',
     image: coverHiddenCorner,
     description:
-      '本书聚焦网络”厌女男性”社群的形成与扩散。作者以卧底与访谈的方式追踪仇恨叙事如何在圈层内部强化，并逐步渗透到现实冲突中，进而讨论如何拆解厌女叙事、重建公共对话。',
+      '本书聚焦网络"厌女男性"社群的形成与扩散。作者以卧底与访谈的方式追踪仇恨叙事如何在圈层内部强化，并逐步渗透到现实冲突中，进而讨论如何拆解厌女叙事、重建公共对话。',
     techStack: ['阅读笔记', '社会观察'],
     links: [],
   },
@@ -159,159 +149,7 @@ const recentBooks: Project[] = [
   },
 ]
 
-function clampIndex(index: number, length: number) {
-  if (length <= 0) return 0
-  const mod = index % length
-  return mod < 0 ? mod + length : mod
-}
-
-function CarouselSection({
-  id,
-  ariaLabel,
-  items,
-}: {
-  id: string
-  ariaLabel: string
-  items: CarouselItem[]
-}) {
-  const [index, setIndex] = useState(0)
-  const [lastInteractionMs, setLastInteractionMs] = useState<number>(0)
-  const startXRef = useRef<number | null>(null)
-  const pointerActiveRef = useRef(false)
-  const indexRef = useRef(0)
-
-  const count = items.length
-  const current = items[clampIndex(index, count)]
-
-  useEffect(() => {
-    indexRef.current = index
-  }, [index])
-
-  useEffect(() => {
-    if (count <= 1) return
-
-    const interval = window.setInterval(() => {
-      const now = Date.now()
-      const hasInteractedRecently = lastInteractionMs > 0 && now - lastInteractionMs < 5 * 60 * 1000
-      if (hasInteractedRecently) return
-      setIndex((i) => clampIndex(i + 1, count))
-    }, 10_000)
-
-    return () => window.clearInterval(interval)
-  }, [count, lastInteractionMs])
-
-  const manualTo = (next: number) => {
-    setLastInteractionMs(Date.now())
-    setIndex(clampIndex(next, count))
-  }
-
-  return (
-    <section id={id} className="section" aria-label={ariaLabel} data-carousel-id={id}>
-      <div className="container" data-reveal>
-        <div
-          className="carousel"
-          onPointerDown={(e) => {
-            const target = e.target as HTMLElement | null
-            if (target?.closest('button,a')) return
-            pointerActiveRef.current = true
-            startXRef.current = e.clientX
-            ;(e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId)
-          }}
-          onPointerUp={(e) => {
-            if (!pointerActiveRef.current) return
-            pointerActiveRef.current = false
-            const startX = startXRef.current
-            startXRef.current = null
-            if (startX == null) return
-            const delta = e.clientX - startX
-            if (Math.abs(delta) < 42) return
-            manualTo(indexRef.current + (delta < 0 ? 1 : -1))
-          }}
-        >
-          <div className="carouselStage" style={{ transform: `translateX(${-100 * clampIndex(index, count)}%)` }}>
-            {items.map((item) => (
-              <article key={item.title} className="carouselSlide">
-                <div className="carouselLeft">
-                  <p className="carouselEyebrow">{item.eyebrow}</p>
-                  {item.href ? (
-                    <a className="carouselTitleLink" href={item.href} target="_blank" rel="noreferrer">
-                      <h2 className="carouselTitle">{item.title}</h2>
-                    </a>
-                  ) : (
-                    <h2 className="carouselTitle">{item.title}</h2>
-                  )}
-                  {item.meta ? <p className="carouselMeta">{item.meta}</p> : null}
-                  <p className="carouselDesc">{item.description}</p>
-                  {item.href && (
-                    <a className="carouselCta" href={item.href} target="_blank" rel="noreferrer">
-                      {item.ctaLabel} <span aria-hidden="true">→</span>
-                    </a>
-                  )}
-                </div>
-                {item.href ? (
-                  <a className="carouselRight" href={item.href} target="_blank" rel="noreferrer" aria-label={`打开：${item.title}`}>
-                    <img className="carouselImg" src={item.image} alt="" loading="lazy" />
-                  </a>
-                ) : (
-                  <div className="carouselRight">
-                    <img className="carouselImg" src={item.image} alt="" loading="lazy" />
-                  </div>
-                )}
-              </article>
-            ))}
-          </div>
-
-          <div className="carouselControls" aria-label="轮播控制">
-            <button
-              className="carouselBtn"
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation()
-                manualTo(indexRef.current - 1)
-              }}
-              aria-label="上一条"
-            >
-              ←
-            </button>
-            <div className="carouselDots" aria-label="轮播分页">
-              {items.map((_, i) => (
-                <button
-                  key={i}
-                  className={`carouselDot ${clampIndex(index, count) === i ? 'isActive' : ''}`}
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    manualTo(i)
-                  }}
-                  aria-label={`切换到第 ${i + 1} 条`}
-                />
-              ))}
-            </div>
-            <button
-              className="carouselBtn"
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation()
-                manualTo(indexRef.current + 1)
-              }}
-              aria-label="下一条"
-            >
-              →
-            </button>
-          </div>
-        </div>
-
-        {/* 便于屏幕阅读器获取当前内容 */}
-        <p className="srOnly" aria-live="polite">
-          当前：{current?.title}
-        </p>
-      </div>
-    </section>
-  )
-}
-
 function setupRevealOnScroll() {
-  // 轻量滚动进入动画：只在支持时启用
   if (typeof window === 'undefined') return
   const elements = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'))
   if (!elements.length) return
@@ -330,12 +168,18 @@ function setupRevealOnScroll() {
     (entries) => {
       for (const entry of entries) {
         if (entry.isIntersecting) {
-          ;(entry.target as HTMLElement).setAttribute('data-revealed', 'true')
+          const el = entry.target as HTMLElement
+          const delay = el.dataset.revealDelay ? parseInt(el.dataset.revealDelay) : 0
+          if (delay > 0) {
+            window.setTimeout(() => el.setAttribute('data-revealed', 'true'), delay)
+          } else {
+            el.setAttribute('data-revealed', 'true')
+          }
           io.unobserve(entry.target)
         }
       }
     },
-    { rootMargin: '0px 0px -10% 0px', threshold: 0.08 },
+    { rootMargin: '0px 0px -8% 0px', threshold: 0.06 },
   )
   elements.forEach((el) => io.observe(el))
   return () => io.disconnect()
@@ -376,7 +220,6 @@ function App() {
       raf = requestAnimationFrame(draw)
       const now = performance.now()
 
-      // prune
       while (points.length && now - points[0].t > maxAgeMs) points.shift()
 
       ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -403,7 +246,6 @@ function App() {
     const onMove = (e: PointerEvent) => {
       const now = performance.now()
       points.push({ x: e.clientX, y: e.clientY, t: now })
-      // limit density
       if (points.length > 90) points.splice(0, points.length - 90)
     }
 
@@ -436,6 +278,7 @@ function App() {
       </header>
 
       <main>
+        {/* Hero — 整体作为一块入场 */}
         <section id="home" className="section heroSection">
           <div className="heroGrid" data-reveal>
             <div className="homeSplit">
@@ -514,72 +357,133 @@ function App() {
           </div>
         </section>
 
+        {/* About — 标题、正文、标签依次入场 */}
         <section id="about" className="section" aria-label="关于我">
-          <div className="container sectionFrame" data-reveal>
-            <h2 className="sectionTitle sectionTitleAbout">关于我</h2>
-            <p className="sectionLead sectionLeadAboutNoBreak">
+          <div className="container sectionFrame">
+            <h2 className="sectionTitle sectionTitleAbout" data-reveal>关于我</h2>
+            <p className="sectionLead sectionLeadAboutNoBreak" data-reveal data-reveal-delay="80">
               我专注于将业务原始数据转化为可解释、可决策的可视化结果，结合写作能力输出清晰的<span className="noWrap">分析报告</span>。
             </p>
-            <div className="chips">
+            <div className="chips" data-reveal data-reveal-delay="160">
               {profile.skills.map((s) => (
-                <span key={s} className="chip">
-                  {s}
-                </span>
+                <span key={s} className="chip">{s}</span>
               ))}
             </div>
           </div>
         </section>
 
-        <CarouselSection
-          id="writing"
-          ariaLabel="公众号文章"
-          items={writingArticles.slice(0, 3).map((p) => ({
-            eyebrow: '公众号《明听影思》',
-            title: p.name,
-            description: p.description,
-            image: p.image,
-            href: p.links[0]?.href ?? '#',
-            ctaLabel: '阅读文章',
-          }))}
-        />
+        {/* Writing — 标题先入，卡片 stagger */}
+        <section id="writing" className="section" aria-label="公众号文章">
+          <div className="container">
+            <h2 className="sectionTitle sectionTitleWriting" data-reveal>公众号《明听影思》</h2>
+            <div className="grid">
+              {writingArticles.map((p, i) => (
+                <article
+                  key={p.name}
+                  className="card"
+                  data-reveal
+                  data-reveal-delay={String(i * 90)}
+                >
+                  <div className="cardMedia">
+                    <img src={p.image} alt="" loading="lazy" />
+                  </div>
+                  <div className="cardBody">
+                    <h3 className="cardTitle">{p.name}</h3>
+                    <p className="cardDesc">{p.description}</p>
+                    <div className="tagRow">
+                      {p.techStack.map((t) => (
+                        <span key={t} className="tag">{t}</span>
+                      ))}
+                    </div>
+                    <div className="linkRow">
+                      <a className="link" href={p.links[0]?.href} target="_blank" rel="noreferrer">
+                        阅读文章 <span aria-hidden="true">→</span>
+                      </a>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
 
-        <CarouselSection
-          id="projects"
-          ariaLabel="AI项目"
-          items={projects.slice(0, 2).map((p) => ({
-            eyebrow: 'AI项目',
-            title: p.name,
-            description: p.description,
-            image: p.image,
-            href: p.links[0]?.href ?? '#',
-            ctaLabel: '查看项目',
-          }))}
-        />
+        {/* Projects — 标题先入，两张卡片 stagger */}
+        <section id="projects" className="section" aria-label="AI 项目">
+          <div className="container">
+            <h2 className="sectionTitle sectionTitleProjects" data-reveal>AI 项目</h2>
+            <div className="grid grid2">
+              {projects.map((p, i) => (
+                <article
+                  key={p.name}
+                  className="card"
+                  data-reveal
+                  data-reveal-delay={String(i * 100)}
+                >
+                  <div className="cardMedia">
+                    <img src={p.image} alt="" loading="lazy" />
+                  </div>
+                  <div className="cardBody">
+                    <h3 className="cardTitle">{p.name}</h3>
+                    <p className="cardDesc">{p.description}</p>
+                    <div className="tagRow">
+                      {p.techStack.map((t) => (
+                        <span key={t} className="tag">{t}</span>
+                      ))}
+                    </div>
+                    <div className="linkRow">
+                      <a className="link" href={p.links[0]?.href} target="_blank" rel="noreferrer">
+                        在线预览 <span aria-hidden="true">→</span>
+                      </a>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
 
-        <CarouselSection
-          id="reading"
-          ariaLabel="阅读即世界"
-          items={recentBooks.slice(0, 3).map((p) => ({
-            eyebrow: '阅读即世界',
-            title: p.name,
-            meta: p.author,
-            description: p.description,
-            image: p.image,
-            href: p.links[0]?.href,
-            ctaLabel: '查看笔记',
-          }))}
-        />
+        {/* Reading — 标题先入，每行依次入场 */}
+        <section id="reading" className="section" aria-label="近期阅读">
+          <div className="container">
+            <h2 className="sectionTitle sectionTitleReading" data-reveal>近期阅读</h2>
+            <div className="altList">
+              {recentBooks.map((p, i) => (
+                <article
+                  key={p.name}
+                  className="altItem"
+                  data-reveal
+                  data-reveal-delay={String(i * 100)}
+                >
+                  <div className="altItemImg">
+                    <img src={p.image} alt="" loading="lazy" />
+                  </div>
+                  <div className="altItemBody">
+                    <h3 className="altItemTitle">{p.name}</h3>
+                    {p.author && <p className="altItemAuthor">{p.author}</p>}
+                    <p className="altItemDesc">{p.description}</p>
+                    <div className="tagRow">
+                      {p.techStack.map((t) => (
+                        <span key={t} className="tag">{t}</span>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
 
+        {/* Contact */}
         <section id="contact" className="section" aria-label="联系方式">
-          <div className="container sectionFrame" data-reveal>
-            <h2 className="sectionTitle sectionTitleContact">联系我</h2>
-            <p className="sectionLead">
+          <div className="container sectionFrame">
+            <h2 className="sectionTitle sectionTitleContact" data-reveal>联系我</h2>
+            <p className="sectionLead" data-reveal data-reveal-delay="80">
               邮箱：{' '}
               <a className="inlineLink" href={`mailto:${profile.contact.email}`}>
                 {profile.contact.email}
               </a>
             </p>
-            <p className="sectionLead">
+            <p className="sectionLead" data-reveal data-reveal-delay="160">
               备用邮箱：{' '}
               <a className="inlineLink" href="mailto:linminglei22@gmail.com">
                 linminglei22@gmail.com
