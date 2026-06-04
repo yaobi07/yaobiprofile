@@ -46,6 +46,19 @@ const profile = {
 
 const projects: Project[] = [
   {
+    name: '在一起 · Together',
+    image: '/ai-love-app.svg',
+    description:
+      '为情侣打造的极简见面记录微信小程序。以日历格子为核心视觉，记录两人在一起的每一天；配备热力图、心愿清单、足迹地图与往年回溯，双端实时同步。',
+    techStack: ['微信小程序', '云开发 CloudBase', 'AI辅助开发'],
+    links: [
+      {
+        label: '微信扫码体验',
+        href: '#projects',
+      },
+    ],
+  },
+  {
     name: '亚马逊购物篮分析及可视化项目',
     image: '/ai-basket-network.svg',
     description:
@@ -405,7 +418,7 @@ function App() {
         <section id="projects" className="section" aria-label="AI 项目">
           <div className="container">
             <h2 className="sectionTitle sectionTitleProjects" data-reveal>AI 项目</h2>
-            <div className="grid grid2">
+            <div className="grid">
               {projects.map((p, i) => (
                 <article
                   key={p.name}
