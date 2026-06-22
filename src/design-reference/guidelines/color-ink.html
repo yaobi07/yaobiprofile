@@ -1,0 +1,24 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Ink / Text" subtitle="Three-step warm-gray text ramp" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; padding: 20px; background: var(--surface); }
+  .row { display: flex; gap: 12px; }
+  .sw { flex: 1; border-radius: var(--radius-md); height: 96px;
+        display: flex; flex-direction: column; justify-content: flex-end; padding: 10px 12px; }
+  .name { font: var(--fw-semi) 13px var(--font-sans); }
+  .hex  { font: var(--fw-medium) 11px var(--font-mono); opacity: 0.7; margin-top: 2px; }
+  .lbl  { font: var(--fw-black) 22px var(--font-sans); letter-spacing: -0.5px; margin-bottom: auto; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="sw" style="background:var(--ink);color:#fff"><span class="lbl">Aa 咬笔</span><span class="name">--ink</span><span class="hex">#1c1917</span></div>
+    <div class="sw" style="background:var(--ink-body);color:#fff"><span class="lbl">Aa 咬笔</span><span class="name">--ink-body</span><span class="hex">#3f3c39</span></div>
+    <div class="sw" style="background:var(--ink-muted);color:#fff"><span class="lbl">Aa 咬笔</span><span class="name">--ink-muted</span><span class="hex">#6b6560</span></div>
+  </div>
+</body>
+</html>

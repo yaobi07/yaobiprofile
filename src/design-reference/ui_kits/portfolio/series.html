@@ -1,0 +1,282 @@
+<!-- @dsCard group="Portfolio" viewport="1320x860" name="系列专页 (Series)" subtitle="色块金句剧场 + 左右联动探索台" -->
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>系列 · 明听影思</title>
+<link rel="stylesheet" href="../../styles.css"/>
+<style>
+  *{ box-sizing: border-box; }
+  body{ margin:0; }
+  .S{
+    --line: rgba(28,25,23,0.13);
+    --ys-cursor: url('../../assets/pen-cursor.svg') 6 28, crosshair;
+    position:relative; isolation:isolate; min-height:100vh;
+    background: linear-gradient(180deg, var(--paper) 0%, var(--paper-warm) 130%);
+    color:var(--ink); font-family:var(--font-sans); cursor:var(--ys-cursor); overflow-x:clip;
+  }
+  .S a,.S button{ cursor:var(--ys-cursor); }
+  .serif{ font-family:var(--font-serif); }
+  .kick{ font: var(--fw-bold) 12px/1 var(--font-sans); letter-spacing:0.32em; text-transform:uppercase; color:var(--ink-muted); }
+
+  /* top bar */
+  .topbar{ position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between;
+    padding:15px clamp(22px,4vw,48px); backdrop-filter:blur(12px); background:rgba(250,246,242,0.82); border-bottom:2px solid var(--ink); }
+  .back{ display:inline-flex; align-items:center; gap:9px; text-decoration:none; color:var(--ink);
+    font: var(--fw-bold) 12px var(--font-sans); letter-spacing:0.14em; text-transform:uppercase; }
+  .back .a{ display:inline-block; transition:transform 300ms ease; } .back:hover .a{ transform:translateX(-5px); }
+  .brand{ display:flex; align-items:center; gap:10px; font-weight:800; font-size:16px; }
+  .brand .dot{ width:11px; height:11px; border-radius:50%; }
+
+  /* ── 金句剧场 (color-block stage) ── */
+  .stage{ max-width:1340px; margin:0 auto; padding: clamp(26px,3vw,46px) clamp(22px,4vw,48px) clamp(20px,3vw,34px); }
+  .stageHead{ display:flex; align-items:center; gap:14px; margin-bottom:20px; }
+  .stageHead .ln{ flex:1; height:2px; background:var(--ink); }
+  .slab{ position:relative; border-radius:12px; overflow:hidden; padding:clamp(34px,5vw,76px) clamp(26px,4vw,60px);
+    min-height:min(46vw,440px); display:flex; align-items:center; transition:background 800ms ease; }
+  .slab .ghost{ position:absolute; right:-2vw; bottom:-9vw; font-size:34vw; line-height:1; font-weight:900;
+    color:rgba(250,246,242,0.10); pointer-events:none; user-select:none; }
+  .slab .q{ position:relative; margin:0; font-family:var(--font-serif); font-weight:900; color:var(--paper);
+    font-size:clamp(38px,6.2vw,104px); line-height:1.06; letter-spacing:-0.01em; white-space:pre-line;
+    transition:opacity 700ms ease, transform 700ms ease; }
+  .stageFoot{ display:flex; align-items:center; gap:18px; margin-top:22px; flex-wrap:wrap; }
+  .stageFoot .from{ font-family:var(--font-serif); font-size:16px; color:var(--ink); }
+  .stageFoot .ln{ flex:1; min-width:50px; height:2px; background:var(--ink); }
+  .dots{ display:flex; gap:7px; }
+  .dots button{ height:11px; border-radius:999px; border:2px solid var(--ink); background:transparent; transition:all .3s ease; padding:0; }
+
+  .heading{ max-width:1340px; margin:0 auto; padding: clamp(20px,3vw,40px) clamp(22px,4vw,48px) 0;
+    display:flex; align-items:flex-end; gap:24px; flex-wrap:wrap; }
+  .heading h1{ margin:0; font-family:var(--font-serif); font-weight:900; line-height:0.9; letter-spacing:-0.02em;
+    font-size:clamp(46px,7vw,118px); color:var(--ink); }
+  .heading .blurb{ margin:0 0 12px; max-width:42ch; color:var(--ink-body); font-size:clamp(14px,1.4vw,18px); line-height:1.6; }
+  .heading .cnt{ margin-left:auto; align-self:flex-end; font-family:var(--font-serif); font-weight:900;
+    font-size:clamp(28px,4vw,58px); line-height:1; color:transparent; -webkit-text-stroke:1.5px var(--ink); padding-bottom:10px; }
+
+  /* ── 探索台 split explorer ── */
+  .explore{ max-width:1340px; margin:0 auto; padding: clamp(24px,3vw,40px) clamp(22px,4vw,48px) 40px;
+    display:grid; grid-template-columns: 1.02fr 0.98fr; gap:clamp(28px,4vw,64px); align-items:start; }
+  .list{ }
+  .trow{ position:relative; display:grid; grid-template-columns:84px 1fr; gap:18px; align-items:center;
+    border-top:2px solid var(--ink); padding:22px 6px; transition:transform 380ms cubic-bezier(.22,1,.36,1), padding 300ms ease; }
+  .list .trow:last-child{ border-bottom:2px solid var(--ink); }
+  .trow .num{ font-family:var(--font-serif); font-weight:900; font-size:clamp(26px,3vw,50px); line-height:1;
+    color:transparent; -webkit-text-stroke:1.4px var(--ink); transition:color .34s ease, -webkit-text-stroke-color .34s ease; }
+  .trow .tt{ margin:0; font-family:var(--font-serif); font-weight:700; font-size:clamp(19px,2vw,30px); line-height:1.2;
+    color:var(--ink); transition:color .34s ease; }
+  .trow .tk{ margin-top:7px; }
+  .trow .arr{ position:absolute; right:8px; top:50%; transform:translateY(-50%) translateX(-6px); opacity:0;
+    font-size:22px; font-weight:700; transition:opacity .3s ease, transform .3s ease; }
+  .trow.on{ transform:translateX(12px); }
+  .trow.on .num{ color:var(--sc); -webkit-text-stroke-color:var(--sc); }
+  .trow.on .tt{ color:var(--sc); }
+  .trow.on .arr{ opacity:1; transform:translateY(-50%) translateX(0); color:var(--sc); }
+
+  .preview{ position:sticky; top:96px; }
+  .pcard{ position:relative; border-radius:16px; overflow:hidden; border:2px solid var(--ink);
+    box-shadow:0 30px 70px rgba(28,25,23,0.20); background:var(--surface); }
+  .pcard .cov{ position:relative; aspect-ratio:16/10; background:var(--paper-warm); overflow:hidden; }
+  .pcard .cov img{ width:100%; height:100%; object-fit:cover; transition:opacity 420ms ease, transform 9s ease; }
+  .pcard .cov.empty{ display:grid; place-items:center; color:var(--ink-muted); font-weight:600; font-size:13px;
+    background:repeating-linear-gradient(135deg, var(--paper-warm) 0 14px, #f3e8db 14px 28px); }
+  .pcard .ribbon{ position:absolute; top:16px; left:0; color:#fff; padding:7px 16px;
+    font: var(--fw-bold) 11px var(--font-sans); letter-spacing:0.2em; text-transform:uppercase; border-radius:0 8px 8px 0; }
+  .pcard .pbody{ padding:clamp(22px,2.6vw,36px); }
+  .pcard .pq{ margin:0; font-family:var(--font-serif); font-weight:700; line-height:1.22;
+    font-size:clamp(24px,2.9vw,42px); transition:opacity 420ms ease, transform 420ms ease; }
+  .pcard .pt{ margin:14px 0 0; font-size:15px; color:var(--ink-muted); }
+  .pcard .pex{ margin:14px 0 0; color:var(--ink-body); font-size:15px; line-height:1.75; }
+  .pcard .pmeta{ display:flex; gap:8px; margin:18px 0 0; flex-wrap:wrap; }
+  .pcard .tg{ font-family:var(--font-mono); font-size:11px; padding:5px 9px; border-radius:8px; border:1px solid var(--line); color:var(--ink-body); }
+  .pcard .read{ display:inline-flex; align-items:center; gap:10px; margin-top:22px; padding:13px 22px; border-radius:999px;
+    background:var(--ink); color:#fff; text-decoration:none; font-weight:650; box-shadow:0 14px 30px rgba(28,25,23,0.25); }
+  .fade{ animation:fz 460ms cubic-bezier(.22,1,.36,1); }
+  @keyframes fz{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:none; } }
+
+  .joinwrap{ max-width:1340px; margin:0 auto; padding: 20px clamp(22px,4vw,48px) 90px; }
+  .join{ border:2px solid var(--ink); border-radius:18px; padding:38px 34px; background:var(--surface);
+    display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+  .join a.mail{ color:var(--ink); border-bottom:3px solid var(--accent); text-decoration:none; font-weight:600; }
+
+  @media (max-width:900px){
+    .explore{ grid-template-columns:1fr; }
+    .preview{ display:none; }
+    .trow{ cursor:pointer; }
+  }
+  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="./content.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+const { brand, series } = window.YAOBI;
+const params = new URLSearchParams(location.search);
+const sid = params.get('id') || series[0].id;
+const s = series.find(x=>x.id===sid) || series[0];
+
+// quotes for the stage: real 金句 first, fall back to the series blurb
+const quotes = (() => {
+  const qs = s.articles.filter(a=>a.quote).map(a=>({ text:a.quote, from:`${s.name} · ${a.title}` }));
+  return qs.length ? qs : [{ text:s.blurb, from:`${s.name} · ${s.en}` }];
+})();
+const STAGE_BG = [s.color, 'var(--ink-night)'];
+
+function Stage(){
+  const [i,setI]=React.useState(0);
+  const [vis,setVis]=React.useState(true);
+  const go=(n)=>{ setVis(false); setTimeout(()=>{ setI(n); setVis(true); },480); };
+  React.useEffect(()=>{
+    if(quotes.length<2) return;
+    const t=setInterval(()=>{ setVis(false); setTimeout(()=>{ setI(v=>(v+1)%quotes.length); setVis(true); },480); },4600);
+    return ()=>clearInterval(t);
+  },[]);
+  const q=quotes[i];
+  return (
+    <section className="stage">
+      <div className="stageHead">
+        <span className="kick">金句剧场 · {s.en}</span>
+        <span className="ln"></span>
+        <span className="serif" style={{fontSize:15,color:'var(--ink-muted)'}}>{brand.tagline}</span>
+      </div>
+      <div className="slab" style={{background:STAGE_BG[i%STAGE_BG.length]}}>
+        <span aria-hidden="true" className="serif ghost">「」</span>
+        <blockquote className="q" style={{opacity:vis?1:0,transform:vis?'none':'translateY(20px)'}}>
+          <span style={{color:'var(--accent-warm)'}}>「</span>{q.text}<span style={{color:'var(--accent-warm)'}}>」</span>
+        </blockquote>
+      </div>
+      <div className="stageFoot">
+        <span className="from">— {q.from}</span>
+        <span className="ln"></span>
+        <div className="dots">
+          {quotes.map((_,idx)=>(
+            <button key={idx} onClick={()=>go(idx)} aria-label={'金句'+(idx+1)}
+              style={{width:idx===i?28:11, background:idx===i?'var(--ink)':'transparent'}}/>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Explorer({onOpen}){
+  const [act,setAct]=React.useState(0);
+  const a=s.articles[act]||{};
+  const sealed=a.needsContent;
+  const isWide = typeof window!=='undefined' && window.matchMedia('(max-width:900px)').matches;
+  const click=(idx)=>{
+    const art=s.articles[idx];
+    if(isWide){ if(art.needsContent && art.href) window.open(art.href,'_blank'); else if(!art.needsContent) onOpen(art); return; }
+    if(art.needsContent && art.href) window.open(art.href,'_blank'); else if(!art.needsContent) onOpen(art);
+  };
+  return (
+    <section className="explore">
+      <div className="list">
+        {s.articles.map((art,idx)=>(
+          <article key={idx} className={'trow'+(idx===act?' on':'')} style={{'--sc':s.color}}
+            onMouseEnter={()=>setAct(idx)} onClick={()=>click(idx)}>
+            <div className="num">{String(idx+1).padStart(2,'0')}</div>
+            <div>
+              <span className="kick tk" style={{color:s.color}}>{s.en}</span>
+              <h3 className="tt" style={{marginTop:4}}>{art.needsContent?(art.href?'新文章 · 点击阅读原文':'早期作品 · 待补内容'):art.title}</h3>
+            </div>
+            <span className="arr">→</span>
+          </article>
+        ))}
+      </div>
+      <div className="preview">
+        <div className="pcard">
+          <div className={'cov'+(a.cover?'':' empty')} key={'c'+act}>
+            {a.cover ? <img className="fade" src={a.cover} alt=""/> : <span>未命名 · 待补金句</span>}
+            <span className="ribbon" style={{background:s.color}}>{s.en} · {s.name}</span>
+          </div>
+          <div className="pbody">
+            <blockquote className="pq fade" key={'q'+act} style={{color:s.color}}>
+              {a.quote ? '「'+a.quote+'」' : (sealed ? '这一篇，正在路上。' : a.title)}
+            </blockquote>
+            {!sealed && <p className="pt">{a.title}</p>}
+            {a.excerpt && <p className="pex">{a.excerpt}</p>}
+            <div className="pmeta">{(a.tags||[]).map(t=>(<span key={t} className="tg">{t}</span>))}</div>
+            {(!sealed || a.href) && (
+              <a className="read" href={a.href||'#'} target={a.href?'_blank':'_self'} rel="noreferrer"
+                 onClick={(e)=>{ if(!sealed){ e.preventDefault(); onOpen(a); } }}>
+                {sealed?'在公众号阅读原文':'展开预览'} <span>→</span>
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Sheet({data,onClose}){
+  const a=data;
+  React.useEffect(()=>{
+    const h=e=>{ if(e.key==='Escape') onClose(); };
+    window.addEventListener('keydown',h); return ()=>window.removeEventListener('keydown',h);
+  },[onClose]);
+  return (
+    <div onClick={onClose} style={{position:'fixed',inset:0,zIndex:80,background:'rgba(20,14,11,0.5)',backdropFilter:'blur(6px)',
+      display:'flex',alignItems:'center',justifyContent:'center',padding:'clamp(16px,3vw,40px)',
+      opacity:a?1:0,pointerEvents:a?'auto':'none',transition:'opacity 260ms ease'}}>
+      {a && (
+        <div onClick={e=>e.stopPropagation()} style={{position:'relative',width:'min(720px,100%)',maxHeight:'90vh',overflow:'auto',
+          background:'var(--surface)',borderRadius:18,boxShadow:'0 50px 120px rgba(0,0,0,0.42)'}}>
+          <button onClick={onClose} aria-label="关闭" style={{position:'absolute',top:14,right:16,zIndex:2,width:40,height:40,borderRadius:'50%',
+            border:'1px solid var(--line)',background:'rgba(255,255,255,0.9)',color:'var(--ink)',fontSize:20}}>×</button>
+          {a.cover && (<div style={{position:'relative',background:'#fff',borderBottom:'1px solid var(--line)',borderRadius:'18px 18px 0 0',overflow:'hidden'}}>
+            <span style={{position:'absolute',top:16,left:0,color:'#fff',padding:'7px 16px',font:'var(--fw-bold) 11px var(--font-sans)',letterSpacing:'0.2em',textTransform:'uppercase',borderRadius:'0 8px 8px 0',background:s.color}}>{s.en} · {s.name}系列</span>
+            <img src={a.cover} alt="" style={{display:'block',width:'100%',maxHeight:300,objectFit:'contain'}}/>
+          </div>)}
+          <div style={{padding:'clamp(24px,3.4vw,44px)'}}>
+            <span className="kick" style={{color:s.color}}>{s.en} · {s.name}</span>
+            <h3 className="serif" style={{margin:'12px 0 18px',fontSize:'clamp(22px,2.8vw,34px)',lineHeight:1.25,fontWeight:700,color:'var(--ink)'}}>{a.title||'新文章 · 待补金句'}</h3>
+            {a.quote && <blockquote className="serif" style={{margin:'6px 0 22px',fontWeight:600,lineHeight:1.26,fontSize:'clamp(26px,3.4vw,44px)',color:s.color}}>「{a.quote}」</blockquote>}
+            {a.excerpt && <p style={{margin:0,color:'var(--ink-body)',fontSize:16,lineHeight:1.85}}>{a.excerpt}</p>}
+            {a.href && (<a href={a.href} target="_blank" rel="noreferrer" style={{display:'inline-flex',alignItems:'center',gap:10,marginTop:24,padding:'13px 22px',borderRadius:999,background:'var(--ink)',color:'#fff',textDecoration:'none',fontWeight:650,boxShadow:'0 14px 30px rgba(28,25,23,0.25)'}}>在公众号阅读全文 <span>→</span></a>)}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function Page(){
+  const [modal,setModal]=React.useState(null);
+  return (
+    <div className="S">
+      <div className="topbar">
+        <a className="back" href="index.html"><span className="a">←</span> 返回书桌</a>
+        <span className="brand"><span className="dot" style={{background:s.color}}></span>{brand.name} · {brand.account}</span>
+      </div>
+      <Stage/>
+      <div className="heading">
+        <h1>{s.name}</h1>
+        <p className="blurb">{s.blurb}</p>
+        <span className="cnt">{String(s.articles.length).padStart(2,'0')} 篇</span>
+      </div>
+      <Explorer onOpen={setModal}/>
+      <div className="joinwrap">
+        <div className="join">
+          <div>
+            <span className="kick" style={{color:s.color}}>JOIN US · 加入我们</span>
+            <p className="serif" style={{margin:'12px 0 0',fontSize:'clamp(24px,3.2vw,40px)',fontWeight:800,color:'var(--ink)'}}>如果你也对性别研究感兴趣</p>
+            <p style={{margin:'12px 0 0',color:'var(--ink-body)',fontSize:16,lineHeight:1.8}}>有想聊的话题，欢迎加入。</p>
+            <p style={{margin:'14px 0 0',color:'var(--ink-muted)'}}>联系方式：<a className="mail" href={'mailto:'+brand.email}>{brand.email}</a></p>
+          </div>
+          <a className="back" href="index.html" style={{border:'2px solid var(--ink)',borderRadius:999,padding:'13px 22px'}}>← 返回全部系列</a>
+        </div>
+      </div>
+      <Sheet data={modal} onClose={()=>setModal(null)}/>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<Page/>);
+</script>
+</body>
+</html>

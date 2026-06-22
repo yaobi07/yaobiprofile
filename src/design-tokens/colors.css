@@ -1,0 +1,57 @@
+/* ─────────────────────────────────────────────────────────
+   Yaobi · Color tokens
+   "Mostly Serious" — warm paper, ink text, terracotta accent.
+   Lifted verbatim from the portfolio source (src/index.css).
+   ───────────────────────────────────────────────────────── */
+:root {
+  /* — Base / paper — */
+  --paper:        #faf6f2;   /* page background, warm off-white */
+  --paper-warm:   #f5ebe3;   /* deeper warm paper, gradients / media wells */
+  --surface:      #ffffff;   /* cards, panels */
+  --surface-raise:#fffefb;   /* hover state of a white surface */
+  --surface-sink: #fdfaf7;   /* gradient floor of raised cards */
+
+  /* — Ink / text — */
+  --ink:          #1c1917;   /* strongest text, headlines */
+  --ink-body:     #3f3c39;   /* default body copy */
+  --ink-muted:    #6b6560;   /* secondary / eyebrow / meta */
+
+  /* — Accent (terracotta) — */
+  --accent:       #c54b3c;   /* primary brand accent */
+  --accent-warm:  #e07a5f;   /* lighter terracotta, gradient partner */
+  --accent-ink:   #c51414;   /* saturated ink-red, used for the cursor trail */
+
+  /* — Secondary (slate) — */
+  --slate:        #2f4f6f;   /* cool counter-accent, gradient partner */
+
+  /* — Bold brand extensions (writing portfolio) — */
+  --accent-hot:   #e23b2e;   /* saturated terracotta for big moments */
+  --cobalt:       #214ad6;   /* bold electric-blue second color */
+  --acid:         #d6e34a;   /* acid chartreuse pop (used sparingly) */
+  --ink-night:    #20140f;   /* warm near-black for dramatic blocks */
+
+  /* — Lines & washes (all derived from ink @ low alpha) — */
+  --border:        rgba(28, 25, 23, 0.10);  /* hairline borders */
+  --border-strong: rgba(28, 25, 23, 0.14);  /* hover / emphasis border */
+  --wash-ink-1:    rgba(28, 25, 23, 0.05);   /* nav hover fill */
+  --wash-ink-2:    rgba(28, 25, 23, 0.08);   /* inactive dots */
+  --wash-paper:    rgba(245, 235, 227, 0.45);/* tag fill */
+
+  /* — Accent washes — */
+  --accent-soft:   rgba(197, 75, 60, 0.12);  /* primary button fill */
+  --accent-line:   rgba(197, 75, 60, 0.35);  /* underline rest state */
+  --accent-ring:   rgba(197, 75, 60, 0.45);  /* focus ring */
+  --slate-soft:    rgba(47, 79, 111, 0.08);  /* primary button fill (partner) */
+
+  /* ── Semantic aliases ── */
+  --bg:             var(--paper);
+  --bg-elevated:    var(--surface);
+  --text:           var(--ink-body);
+  --text-strong:    var(--ink);
+  --text-muted:     var(--ink-muted);
+  --link:           var(--ink);
+  --link-underline: var(--accent-line);
+  --focus-ring:     var(--accent-ring);
+  --surface-card:   var(--surface);
+  --media-well:     var(--paper-warm);
+}

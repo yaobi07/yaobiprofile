@@ -1,0 +1,42 @@
+/* ─────────────────────────────────────────────────────────
+   Yaobi · Effects — radii, shadows, borders, motion
+   Soft warm shadows (tinted with the ink hue, never neutral
+   black), generous rounding, calm easing.
+   ───────────────────────────────────────────────────────── */
+:root {
+  /* — Corner radii — */
+  --radius-sm:   10px;   /* nav pills, tags, small chips */
+  --radius-md:   16px;   /* capability cards, media wells */
+  --radius-lg:   20px;   /* cards */
+  --radius-xl:   24px;   /* framed sections / panels */
+  --radius-pill: 999px;  /* buttons, dots, avatars */
+
+  /* — Shadows (ink-tinted, diffuse, downward) — */
+  --shadow-soft: 0 12px 40px rgba(28, 25, 23, 0.06);
+  --shadow:      0 24px 60px rgba(28, 25, 23, 0.08);
+
+  /* — Borders — */
+  --border-width: 1px;
+  --hairline: var(--border-width) solid var(--border);
+
+  /* — Motion — */
+  --ease-out:   cubic-bezier(0.22, 1, 0.36, 1); /* @kind other */
+  --ease-std:   ease; /* @kind other */
+  --dur-fast:   120ms; /* @kind other */
+  --dur-base:   160ms; /* @kind other */
+  --dur-slow:   600ms; /* @kind other */
+  --dur-carousel: 620ms; /* @kind other */
+
+  /* — Interaction primitives — */
+  --lift:        translateY(-2px); /* @kind other */
+  --lift-sm:     translateY(-1px); /* @kind other */
+
+  /* — Backdrop blur (sticky bar, glass) — */
+  --blur: 14px; /* @kind other */
+
+  /* ── Semantic aliases ── */
+  --card-radius:   var(--radius-lg);
+  --card-shadow:   var(--shadow-soft);
+  --card-shadow-hover: var(--shadow);
+  --panel-radius:  var(--radius-xl);
+}

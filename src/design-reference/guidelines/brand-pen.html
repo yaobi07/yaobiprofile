@@ -1,0 +1,28 @@
+<!-- @dsCard group="Brand" viewport="700x200" name="Pen Motifs & Cursor" subtitle="Orbital pen mascot + ink-red cursor trail" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; padding: 22px 28px; background: var(--surface); display: flex; gap: 28px; align-items: center; }
+  .m { width: 120px; height: 120px; border-radius: var(--radius-md); overflow: hidden;
+       border: var(--hairline); background: var(--paper); flex: none; }
+  .m img { width: 100%; height: 100%; object-fit: contain; }
+  .trail { flex: 1; height: 120px; border-radius: var(--radius-md); border: var(--hairline);
+           background: var(--paper); position: relative; overflow: hidden; }
+  .stroke { position: absolute; top: 50%; left: 8%; width: 84%; height: 6px;
+            border-radius: 999px; transform: translateY(-50%);
+            background: linear-gradient(90deg, transparent, var(--accent-ink) 60%, var(--accent-ink));
+            opacity: 0.75; mix-blend-mode: multiply; }
+  .cap { position: absolute; bottom: 10px; left: 14px; font: var(--fw-medium) 11px var(--font-mono); color: var(--ink-muted); }
+</style>
+</head>
+<body style="font-family: &quot;Hiragino Sans GB&quot;">
+  <div class="m"><img src="../assets/mascot-orbital.gif" alt="orbital pen mascot" /></div>
+  <div class="trail" style="color: rgb(116, 64, 20)">
+    <div class="stroke"></div>
+    <span class="cap">cursor: pen nib · trail rgba(197,20,20,·) multiply</span>
+  </div>
+</body>
+</html>

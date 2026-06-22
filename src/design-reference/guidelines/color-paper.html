@@ -1,0 +1,25 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Paper & Surfaces" subtitle="Warm off-white grounds and white cards" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; padding: 20px; background: var(--paper); }
+  .row { display: flex; gap: 12px; }
+  .sw { flex: 1; border-radius: var(--radius-md); border: var(--hairline);
+        height: 96px; display: flex; flex-direction: column; justify-content: flex-end;
+        padding: 10px 12px; box-shadow: var(--shadow-soft); }
+  .name { font: var(--fw-semi) 13px var(--font-sans); color: var(--ink); }
+  .hex  { font: var(--fw-medium) 11px var(--font-mono); color: var(--ink-muted); margin-top: 2px; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="sw" style="background:var(--paper)"><span class="name">--paper</span><span class="hex">#faf6f2</span></div>
+    <div class="sw" style="background:var(--paper-warm)"><span class="name">--paper-warm</span><span class="hex">#f5ebe3</span></div>
+    <div class="sw" style="background:var(--surface)"><span class="name">--surface</span><span class="hex">#ffffff</span></div>
+    <div class="sw" style="background:var(--surface-sink)"><span class="name">--surface-sink</span><span class="hex">#fdfaf7</span></div>
+  </div>
+</body>
+</html>

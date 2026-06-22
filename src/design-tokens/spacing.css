@@ -1,0 +1,34 @@
+/* ─────────────────────────────────────────────────────────
+   Yaobi · Spacing & layout tokens
+   8px-ish rhythm with a few in-between steps the source uses.
+   ───────────────────────────────────────────────────────── */
+:root {
+  /* — Spacing scale — */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  28px;
+  --space-7:  34px;
+  --space-8:  44px;
+  --space-9:  64px;
+  --space-10: 92px;   /* section vertical padding */
+
+  /* — Container — */
+  --container:     min(1400px, calc(100% - 48px)); /* @kind other */
+  --container-wide: min(1540px, calc(100% - 56px)); /* @kind other */
+  --gutter:        24px;
+
+  /* — Section rhythm — */
+  --section-pad-y: 92px;
+  --grid-gap:      20px;
+
+  /* — Background grid texture — */
+  --grid-cell: 48px; /* @kind spacing */
+
+  /* ── Semantic aliases ── */
+  --stack-sm: var(--space-3);
+  --stack-md: var(--space-5);
+  --stack-lg: var(--space-9);
+}

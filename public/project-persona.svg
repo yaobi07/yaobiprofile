@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1080" viewBox="0 0 720 1080" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="720" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1220"></stop>
+      <stop offset="1" stop-color="#121B31"></stop>
+    </linearGradient>
+    <linearGradient id="accent" x1="150" y1="180" x2="620" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22D3EE" stop-opacity="0.75"></stop>
+      <stop offset="1" stop-color="#A78BFA" stop-opacity="0.65"></stop>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="720" height="1080" rx="56" fill="url(#bg)"></rect>
+  <rect x="36" y="48" width="648" height="984" rx="44" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.10)"></rect>
+
+  
+  <path d="M360 360c62 0 112 50 112 112s-50 112-112 112-112-50-112-112 50-112 112-112Z" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.14)" stroke-width="3"></path>
+  <path d="M220 760c22-110 99-170 140-170h0c41 0 118 60 140 170" stroke="url(#accent)" stroke-width="12" stroke-linecap="round"></path>
+
+  
+  <g opacity="0.95">
+    <circle cx="360" cy="660" r="160" stroke="rgba(34,211,238,0.35)" stroke-width="4"></circle>
+    <circle cx="360" cy="660" r="115" stroke="rgba(167,139,250,0.30)" stroke-width="4"></circle>
+    <circle cx="360" cy="660" r="70" stroke="rgba(255,255,255,0.16)" stroke-width="4"></circle>
+    <path d="M360 500V820" stroke="rgba(255,255,255,0.14)" stroke-width="4" stroke-linecap="round"></path>
+    <path d="M260 610L460 710" stroke="rgba(255,255,255,0.14)" stroke-width="4" stroke-linecap="round"></path>
+    <path d="M460 610L260 710" stroke="rgba(255,255,255,0.14)" stroke-width="4" stroke-linecap="round"></path>
+  </g>
+
+  
+  <g>
+    <circle cx="220" cy="620" r="6" fill="rgba(34,211,238,0.75)"></circle>
+    <circle cx="260" cy="540" r="5" fill="rgba(167,139,250,0.65)"></circle>
+    <circle cx="300" cy="480" r="4" fill="rgba(255,255,255,0.35)"></circle>
+    <circle cx="410" cy="480" r="4" fill="rgba(255,255,255,0.35)"></circle>
+    <circle cx="460" cy="540" r="5" fill="rgba(167,139,250,0.65)"></circle>
+    <circle cx="500" cy="620" r="6" fill="rgba(34,211,238,0.75)"></circle>
+    <circle cx="248" cy="730" r="5" fill="rgba(34,211,238,0.55)"></circle>
+    <circle cx="472" cy="730" r="5" fill="rgba(167,139,250,0.55)"></circle>
+    <circle cx="360" cy="820" r="6" fill="rgba(255,255,255,0.30)"></circle>
+  </g>
+
+  
+  <g transform="translate(128,170)">
+    <rect x="0" y="0" width="150" height="110" rx="18" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.10)"></rect>
+    <path d="M20 85c20-30 35-45 55-30s32 10 45-15" stroke="url(#accent)" stroke-width="8" stroke-linecap="round" fill="none"></path>
+    <circle cx="35" cy="72" r="7" fill="rgba(34,211,238,0.75)"></circle>
+    <circle cx="75" cy="45" r="7" fill="rgba(167,139,250,0.65)"></circle>
+    <circle cx="118" cy="60" r="7" fill="rgba(255,255,255,0.28)"></circle>
+  </g>
+  <g transform="translate(462,170)">
+    <rect x="0" y="0" width="130" height="110" rx="18" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.10)"></rect>
+    <path d="M35 78h60" stroke="rgba(255,255,255,0.14)" stroke-width="10" stroke-linecap="round"></path>
+    <path d="M35 55h44" stroke="rgba(34,211,238,0.55)" stroke-width="10" stroke-linecap="round"></path>
+    <path d="M35 32h28" stroke="rgba(167,139,250,0.52)" stroke-width="10" stroke-linecap="round"></path>
+  </g>
+</svg>

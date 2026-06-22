@@ -1,0 +1,402 @@
+<!-- @dsCard group="Portfolio" viewport="1440x1000" name="写作站 · 方向A 纸感书桌" -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>明听影思 · 写作书桌</title>
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  body { margin: 0; }
+  .A {
+    --line: rgba(28,25,23,0.12);
+    --desk: #efe3d6;
+    --desk-edge: #e3d2c0;
+    --ys-cursor: url('../../assets/pen-cursor.svg') 6 28, crosshair;
+    position: relative; isolation: isolate; min-height: 100vh;
+    background:
+      radial-gradient(ellipse 70% 50% at 14% 6%, rgba(245,235,227,0.9), transparent 60%),
+      radial-gradient(ellipse 55% 45% at 92% 0%, rgba(33,74,214,0.05), transparent 55%),
+      linear-gradient(180deg, var(--paper) 0%, var(--paper-warm) 140%);
+    cursor: var(--ys-cursor); overflow-x: clip;
+  }
+  .A a, .A button { cursor: var(--ys-cursor); }
+  .serif { font-family: var(--font-serif); }
+  .kicker { font: var(--fw-bold) 12px/1 var(--font-sans); letter-spacing: 0.32em; text-transform: uppercase; color: var(--ink-muted); }
+
+  /* ───── nav ───── */
+  .nav { position: sticky; top: 0; z-index: 60; display: flex; align-items: center; justify-content: space-between;
+    padding: 15px 32px; backdrop-filter: blur(12px); background: rgba(250,246,242,0.7); }
+  .nav .brand { display: inline-flex; align-items: baseline; gap: 11px; text-decoration: none; color: var(--ink); }
+
+  /* ───── stage (first viewport) ───── */
+  .stage { position: relative; height: calc(100vh - 60px); min-height: 620px; display: flex; flex-direction: column;
+    overflow: hidden; }
+  .headZone { position: relative; z-index: 3; flex: 0 0 auto; display: grid; grid-template-columns: 1.25fr 0.75fr;
+    gap: 24px; align-items: center; padding: clamp(20px,3vh,44px) clamp(28px,4vw,64px) 0; }
+  .slogan { transition: transform 560ms cubic-bezier(.22,1,.36,1), opacity 360ms ease; }
+  .slogan h1 { margin: 0; font-family: var(--font-serif); font-weight: 900; letter-spacing: -0.01em;
+    font-size: clamp(40px,6.6vw,104px); line-height: 0.98; color: var(--ink); margin-left: -0.04em; }
+  .slogan h1 em { font-style: normal; color: var(--accent-hot); }
+  .slogan .sub { margin: 18px 0 0; font-size: clamp(15px,1.4vw,19px); color: var(--ink-body); line-height: 1.6; max-width: 40ch; }
+  .avatarWrap { justify-self: end; position: relative; display: flex; flex-direction: column; align-items: flex-end;
+    transition: transform 560ms cubic-bezier(.22,1,.36,1), opacity 360ms ease; }
+  .avatar { width: clamp(210px,23vw,340px); aspect-ratio: 1; border-radius: 50%; object-fit: cover;
+    border: 6px solid var(--surface); box-shadow: 0 28px 70px rgba(28,25,23,0.24), 0 0 0 1px var(--line);
+    margin-right: clamp(-40px,-3vw,-12px); }
+  .avatarWrap .stamp { position: absolute; left: -14px; top: 12px; width: 104px; height: 104px; border-radius: 50%;
+    background: var(--accent); color: var(--paper); display: grid; place-items: center; text-align: center;
+    font-family: var(--font-serif); font-weight: 700; font-size: 16px; line-height: 1.25; transform: rotate(-9deg);
+    box-shadow: 0 10px 24px rgba(197,75,60,0.35); }
+  .heroCap { margin: 22px 8px 0; max-width: clamp(220px,24vw,360px); text-align: right; }
+  .heroCap .hq { font-family: var(--font-serif); font-weight: 600; font-size: clamp(18px,1.7vw,26px);
+    line-height: 1.3; color: var(--ink); white-space: pre-line; transition: opacity 600ms ease; }
+  .heroCap .hq .qm { color: var(--accent-hot); }
+  .heroCap .hfrom { margin-top: 10px; font: var(--fw-bold) 11px var(--font-sans); letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--accent-hot); transition: opacity 600ms ease; }
+
+  /* when a folder opens, head fades to the sides */
+  .A.reading .slogan { transform: translateX(-62vw); opacity: 0; }
+  .A.reading .avatarWrap { transform: translateX(62vw); opacity: 0; }
+  .A.reading .desk { filter: blur(3px) saturate(0.9); opacity: 0.45; transform: translateY(10px); }
+
+  /* ───── desk ───── */
+  .desk { position: relative; z-index: 2; flex: 1 1 auto; margin-top: clamp(8px,2vh,20px);
+    transition: opacity 420ms ease, filter 420ms ease, transform 420ms ease; }
+  .desk .surface { position: absolute; left: 0; right: 0; bottom: 0; top: clamp(120px,26vh,230px);
+    background: linear-gradient(180deg, var(--desk) 0%, var(--desk-edge) 100%);
+    border-top: 1px solid rgba(255,255,255,0.7);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 -18px 40px rgba(28,25,23,0.05); }
+  .desk .surface::before { content:""; position:absolute; left:0; right:0; top:-1px; height:14px;
+    background: linear-gradient(180deg, rgba(28,25,23,0.06), transparent); }
+  .deskHint { position: absolute; z-index: 4; top: clamp(40px,9vh,90px); left: 50%;
+    transform: translateX(-50%) translateY(-50%); display: inline-flex; align-items: center; gap: 9px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 8px 16px;
+    font: var(--fw-semi) 13px var(--font-sans); color: var(--ink-body); box-shadow: 0 10px 26px rgba(28,25,23,0.12); }
+  .clusters { position: absolute; inset: 0; z-index: 3; display: flex; align-items: flex-end;
+    justify-content: center; gap: clamp(8px,1.2vw,26px); padding: 0 clamp(14px,2.4vw,40px) clamp(10px,2.4vh,30px); }
+  .clusters .folder:nth-child(2){ animation-delay: .8s; }
+  .clusters .folder:nth-child(3){ animation-delay: 1.6s; }
+  .clusters .folder:nth-child(4){ animation-delay: 2.4s; }
+
+  /* ───── folder ───── */
+  .folder { position: relative; width: clamp(300px,25vw,420px); animation: bob 6s ease-in-out infinite;
+    will-change: transform; }
+  @keyframes bob { 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-6px); } }
+  .fInner { position: relative; transform: rotate(var(--tilt)); transform-origin: bottom center;
+    transition: transform 400ms cubic-bezier(.22,1,.36,1), filter 400ms ease; }
+  .folder .tab { position: absolute; top: -17px; left: 16px; height: 24px; padding: 0 16px;
+    display: inline-flex; align-items: center; border-radius: 7px 12px 0 0; color: #fff;
+    font: var(--fw-bold) 11px/1 var(--font-sans); letter-spacing: 0.18em; text-transform: uppercase;
+    box-shadow: 0 6px 14px rgba(28,25,23,0.16); white-space: nowrap; }
+  .pocket { position: relative; background: var(--surface); border: 1px solid var(--line);
+    border-radius: 3px 12px 12px 12px; box-shadow: 0 16px 30px rgba(28,25,23,0.14); padding: 13px 13px 16px;
+    transition: box-shadow 400ms ease; }
+  .pocket .win { aspect-ratio: 4/3; border-radius: 7px; overflow: hidden; background: #fff; border: 1px solid var(--line); }
+  .pocket .win img { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms ease; }
+  .pocket h3 { margin: 13px 2px 2px; font-family: var(--font-serif); font-size: clamp(17px,1.5vw,21px); line-height: 1.34; font-weight: 700;
+    color: var(--ink); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .pocket .sealedTxt { font-size: 12px; font-weight: 600; color: var(--ink-muted); display:grid; place-items:center; height:100%; padding:0 8px; text-align:center; }
+  .pocket .hint { position: absolute; right: 9px; bottom: 9px; opacity: 0; transform: translateY(6px);
+    background: var(--ink); color: #fff; font: var(--fw-semi) 11px var(--font-sans); padding: 6px 10px; border-radius: 999px;
+    transition: opacity 260ms ease, transform 260ms ease; box-shadow: 0 8px 18px rgba(28,25,23,0.28); }
+  .folder:hover { animation-play-state: paused; z-index: 9; }
+  .folder:hover .fInner { transform: rotate(0deg) translateY(-26px) scale(1.16); filter: drop-shadow(0 30px 40px rgba(28,25,23,0.2)); }
+  .folder:hover .pocket { box-shadow: 0 38px 70px rgba(28,25,23,0.22); }
+  .folder:hover .win img { transform: scale(1.08); }
+  .folder:hover .hint { opacity: 1; transform: translateY(0); }
+  .folder.sealed .pocket { background: repeating-linear-gradient(135deg, var(--surface) 0 11px, #fbf6f0 11px 22px); }
+  .folder.sealed .win { border-style: dashed; display:flex; }
+
+  .scrollCue { position: absolute; z-index: 4; left: 50%; bottom: 14px; transform: translateX(-50%);
+    display: inline-flex; flex-direction: column; align-items: center; gap: 4px; color: var(--ink-muted);
+    font: var(--fw-semi) 12px var(--font-sans); letter-spacing: 0.14em; text-decoration: none; }
+  .scrollCue .arr { animation: nudge 1.8s ease-in-out infinite; font-size: 18px; }
+  @keyframes nudge { 0%,100%{ transform: translateY(0); opacity:.5; } 50%{ transform: translateY(5px); opacity:1; } }
+
+  /* ───── open sheet (clicked folder) ───── */
+  .scrim { position: fixed; inset: 0; z-index: 80; background: rgba(28,20,15,0.34); backdrop-filter: blur(7px);
+    display: flex; align-items: center; justify-content: center; padding: clamp(16px,3vw,40px);
+    opacity: 0; pointer-events: none; transition: opacity 280ms ease; }
+  .scrim.show { opacity: 1; pointer-events: auto; }
+  .sheet { position: relative; width: min(720px,100%); max-height: 90vh; overflow: auto; background: var(--surface);
+    border-radius: 18px; box-shadow: 0 50px 120px rgba(0,0,0,0.42); transform: translateY(22px) scale(0.96);
+    transition: transform 420ms cubic-bezier(.22,1,.36,1); }
+  .scrim.show .sheet { transform: none; }
+  .sheet .cover { position: relative; background: #fff; border-bottom: 1px solid var(--line); border-radius: 18px 18px 0 0; overflow: hidden; }
+  .sheet .cover img { display: block; width: 100%; max-height: 300px; object-fit: contain; }
+  .sheet .cover .ribbon { position: absolute; top: 16px; left: 0; color: #fff; padding: 7px 16px;
+    font: var(--fw-bold) 11px var(--font-sans); letter-spacing: 0.2em; text-transform: uppercase; border-radius: 0 8px 8px 0; }
+  .sheet .sbody { padding: clamp(24px,3.4vw,44px); }
+  .sheet .sbody .q { margin: 6px 0 22px; font-family: var(--font-serif); font-weight: 600; line-height: 1.26;
+    font-size: clamp(26px,3.4vw,44px); }
+  .sheet .x { position: absolute; top: 14px; right: 16px; z-index: 2; width: 40px; height: 40px; border-radius: 50%;
+    border: 1px solid var(--line); background: rgba(255,255,255,0.9); color: var(--ink); font-size: 20px; }
+  @media (max-width: 760px){ .headZone { grid-template-columns: 1fr; } .avatarWrap { display:none; } }
+
+  /* ───── archive (scroll) ───── */
+  .archive { padding: clamp(60px,8vw,110px) clamp(28px,4vw,64px) 30px; max-width: 1320px; margin: 0 auto; }
+  .archHead { display: flex; align-items: flex-end; gap: 20px; flex-wrap: wrap; margin-bottom: 8px; }
+  .archHead h2 { margin: 0; font-family: var(--font-serif); font-weight: 900; line-height: 0.92; letter-spacing: -0.02em;
+    font-size: clamp(44px,7vw,108px); color: var(--ink); }
+  .row { position: relative; display: grid; grid-template-columns: 96px 1fr 200px; gap: 26px; align-items: center;
+    border-top: 1.5px solid var(--ink); padding: 22px 4px; cursor: var(--ys-cursor);
+    transition: transform 360ms cubic-bezier(.22,1,.36,1); }
+  .row:last-child { border-bottom: 1.5px solid var(--ink); }
+  .row .num { font-family: var(--font-serif); font-weight: 900; font-size: clamp(30px,3.4vw,56px); line-height: 1;
+    color: transparent; -webkit-text-stroke: 1.4px var(--ink); transition: color 340ms ease, -webkit-text-stroke-color 340ms ease; }
+  .row .rt { margin: 0; font-family: var(--font-serif); font-weight: 700; font-size: clamp(20px,2.2vw,34px);
+    line-height: 1.2; color: var(--ink); transition: color 340ms ease; }
+  .row .rx { margin: 8px 0 0; color: var(--ink-muted); font-size: 14px; line-height: 1.55; max-width: 52ch; }
+  .row .rthumb { aspect-ratio: 16/10; border-radius: 7px; overflow: hidden; border: 1px solid var(--line);
+    background: var(--paper-warm); }
+  .row .rthumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms ease; }
+  .row .rthumb .seal { display:grid; place-items:center; height:100%; font-size:12px; font-weight:600; color:var(--ink-muted); }
+  .row .rmeta { display:flex; gap:7px; margin-top:14px; flex-wrap:wrap; }
+  .row .rmeta .tg { font-family: var(--font-mono); font-size: 11px; padding: 4px 8px; border-radius: 7px; border: 1px solid var(--line); color: var(--ink-body); }
+  .row:hover { transform: translateX(10px); }
+  .row:hover .num, .row:hover .rt { color: var(--rc); }
+  .row:hover .num { -webkit-text-stroke-color: var(--rc); }
+  .row:hover .rthumb img { transform: scale(1.07); }
+  @media (max-width: 820px){ .row { grid-template-columns: 60px 1fr; } .row .rthumb { display:none; } }
+
+  .pquote { max-width: 1100px; margin: 0 auto; padding: clamp(40px,6vw,90px) clamp(28px,4vw,64px); overflow: hidden; }
+  .pquote blockquote { margin: 0; font-family: var(--font-serif); font-weight: 500; line-height: 1.16;
+    font-size: clamp(32px,5.4vw,76px); color: var(--ink); }
+
+  @media (prefers-reduced-motion: reduce){ *{ animation: none !important; } }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="./content.js"></script>
+<script type="text/babel" src="./CursorTrail.jsx"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+const { brand, series } = window.YAOBI;
+const TILTS = [-5, 3.5, -2.5, 4, -3.5, 2.5];
+
+function useScrollY(){
+  const [y,setY] = React.useState(0);
+  React.useEffect(()=>{
+    let raf=0; const on=()=>{ cancelAnimationFrame(raf); raf=requestAnimationFrame(()=>setY(window.scrollY)); };
+    window.addEventListener('scroll',on,{passive:true}); on();
+    return ()=>{ window.removeEventListener('scroll',on); cancelAnimationFrame(raf); };
+  },[]);
+  return y;
+}
+
+function Nav(){
+  return (
+    <header className="nav">
+      <a href="#top" className="brand">
+        <span style={{width:11,height:11,borderRadius:999,background:'linear-gradient(135deg,var(--accent),var(--accent-warm))',boxShadow:'0 0 0 4px rgba(197,75,60,.15)',alignSelf:'center'}}/>
+        <span style={{fontWeight:800,letterSpacing:'0.4px',fontSize:18}}>咬笔</span>
+        <span style={{color:'var(--line)'}}>·</span>
+        <span className="serif" style={{fontSize:16,color:'var(--ink)'}}>明听影思</span>
+      </a>
+      <nav style={{display:'flex',gap:6,alignItems:'center'}}>
+        <a href="#archive" className="kicker" style={{textDecoration:'none',color:'var(--ink)',padding:'8px 12px'}}>全部作品</a>
+        <a href="#contact" className="kicker" style={{textDecoration:'none',color:'var(--paper)',background:'var(--ink)',padding:'9px 14px',borderRadius:999}}>联系</a>
+      </nav>
+    </header>
+  );
+}
+
+function Folder({a,s,tilt,onOpen}){
+  const sealed = a.needsContent;
+  return (
+    <div className={'folder'+(sealed?' sealed':'')} style={{'--tilt':tilt+'deg'}}
+      onClick={()=> sealed ? window.open(a.href,'_blank') : onOpen(a,s)}>
+      <div className="fInner">
+        <span className="tab" style={{background:s.color}}>{s.name}</span>
+        <div className="pocket">
+          <div className="win">
+            {sealed ? <span className="sealedTxt">未命名<br/>点击阅读原文</span> : <img src={a.cover} alt="" loading="lazy"/>}
+          </div>
+          <h3>{sealed ? '新文章 · 待补金句' : a.title}</h3>
+          <span className="hint">{sealed?'阅读原文 →':'点开 →'}</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function HeroQuote(){
+  const list = (window.YAOBI.hero||[]);
+  const [i,setI]=React.useState(0);
+  const [vis,setVis]=React.useState(true);
+  React.useEffect(()=>{
+    if(list.length<2) return;
+    const t=setInterval(()=>{ setVis(false); setTimeout(()=>{ setI(v=>(v+1)%list.length); setVis(true); },600); },4200);
+    return ()=>clearInterval(t);
+  },[list.length]);
+  const q=list[i]||{};
+  return (
+    <div className="heroCap">
+      <div className="hq" style={{opacity:vis?1:0}}>
+        <span className="qm">「</span>{q.text||''}<span className="qm">」</span>
+      </div>
+      <div className="hfrom" style={{opacity:vis?1:0}}>— {q.from||''}</div>
+    </div>
+  );
+}
+
+function Stage({reading,onOpen}){
+  const fp = series.find(s=>s.id==='freeplay'), ar = series.find(s=>s.id==='arrival');
+  const desk = [
+    {a: fp.articles[0], s: fp}, {a: fp.articles[1], s: fp},
+    {a: ar.articles[0], s: ar}, {a: ar.articles[1], s: ar},
+  ];
+  return (
+    <section id="top" className="stage">
+      <div className="headZone">
+        <div className="slogan">
+          <p className="kicker" style={{marginBottom:18}}>公众号《明听影思》· 写作书桌</p>
+          <h1>在光明中倾听，<br/><em>在阴影中思考。</em></h1>
+          <p className="sub">{brand.sub}</p>
+        </div>
+        <div className="avatarWrap">
+          <img className="avatar" src="../../assets/avatar.jpg" alt="咬笔 头像"/>
+          <span className="stamp">明听<br/>影思</span>
+          <HeroQuote/>
+        </div>
+      </div>
+      <div className="desk">
+        <div className="surface"></div>
+        <div className="clusters">
+          {desk.map((d,i)=>(<Folder key={i} a={d.a} s={d.s} tilt={TILTS[i]} onOpen={onOpen}/>))}
+        </div>
+        <a href="#archive" className="scrollCue"><span>全部作品</span><span className="arr">↓</span></a>
+      </div>
+    </section>
+  );
+}
+
+function Sheet({data,onClose}){
+  const a = data && data.a, s = data && data.s;
+  React.useEffect(()=>{
+    const k=e=>{ if(e.key==='Escape') onClose(); };
+    window.addEventListener('keydown',k); return ()=>window.removeEventListener('keydown',k);
+  },[onClose]);
+  return (
+    <div className={'scrim'+(data?' show':'')} onClick={onClose}>
+      {a && (
+        <div className="sheet" onClick={e=>e.stopPropagation()}>
+          <button className="x" onClick={onClose} aria-label="关闭">×</button>
+          <div className="cover">
+            <span className="ribbon" style={{background:s.color}}>{s.en} · {s.name}系列</span>
+            <img src={a.cover} alt=""/>
+          </div>
+          <div className="sbody">
+            <span className="kicker" style={{color:s.color}}>{s.en} · {s.name}</span>
+            <h3 className="serif" style={{margin:'12px 0 18px',fontSize:'clamp(22px,2.8vw,34px)',lineHeight:1.25,fontWeight:700,color:'var(--ink)'}}>{a.title}</h3>
+            <blockquote className="q" style={{color:s.color}}>「{a.quote}」</blockquote>
+            <p style={{margin:0,color:'var(--ink-body)',fontSize:16,lineHeight:1.85}}>{a.excerpt}</p>
+            <div style={{display:'flex',gap:8,margin:'22px 0 26px',flexWrap:'wrap'}}>
+              {a.tags.map(t=>(<span key={t} style={{fontFamily:'var(--font-mono)',fontSize:12,padding:'6px 9px',borderRadius:9,border:'1px solid var(--line)',color:'var(--ink-body)'}}>{t}</span>))}
+            </div>
+            <a href={a.href} target="_blank" rel="noreferrer" style={{display:'inline-flex',alignItems:'center',gap:10,padding:'13px 22px',borderRadius:999,
+              background:'var(--ink)',color:'#fff',textDecoration:'none',fontWeight:650,boxShadow:'0 14px 30px rgba(28,25,23,0.25)'}}>在公众号阅读全文 <span>→</span></a>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ArchiveRow({a,s,n,onOpen}){
+  const sealed = a.needsContent;
+  return (
+    <article className="row" style={{'--rc':s.color}}
+      onClick={()=> sealed ? window.open(a.href,'_blank') : onOpen(a,s)}>
+      <div className="num">{String(n).padStart(2,'0')}</div>
+      <div>
+        <span className="kicker" style={{color:s.color}}>{s.en} · {s.name}</span>
+        <h3 className="rt" style={{marginTop:8}}>{sealed?'新文章 · 点击阅读原文':a.title}</h3>
+        {!sealed && <p className="rx">{a.excerpt}</p>}
+        <div className="rmeta">{a.tags.map(t=>(<span key={t} className="tg">{t}</span>))}</div>
+      </div>
+      <div className="rthumb">{sealed? <span className="seal">未命名</span> : <img src={a.cover} alt="" loading="lazy"/>}</div>
+    </article>
+  );
+}
+
+function App(){
+  const y = useScrollY();
+  const [modal,setModal] = React.useState(null);
+  const open = (a,s)=> setModal({a,s});
+  return (
+    <div className={'A'+(modal?' reading':'')}>
+      <div style={{position:'absolute',inset:0,overflow:'hidden',pointerEvents:'none'}}><CursorTrail/></div>
+      <Nav/>
+      <main>
+        <Stage reading={!!modal} onOpen={open}/>
+
+        <section id="archive" className="archive">
+          <div className="archHead">
+            <span className="kicker">THE ARCHIVE</span>
+          </div>
+          <h2 className="serif" style={{margin:'4px 0 30px',fontFamily:'var(--font-serif)',fontWeight:900,fontSize:'clamp(40px,6vw,96px)',lineHeight:0.94,letterSpacing:'-0.02em',color:'var(--ink)'}}>
+            全部<span style={{color:'var(--accent-hot)'}}>作品</span>
+          </h2>
+          {series.map((s)=>(
+            <div key={s.id} style={{marginBottom:56}}>
+              <div style={{display:'flex',alignItems:'flex-end',gap:18,flexWrap:'wrap',marginBottom:6}}>
+                <h3 className="serif" style={{margin:0,fontSize:'clamp(30px,4vw,60px)',fontWeight:900,lineHeight:1,color:'var(--ink)'}}>
+                  {s.name}<span style={{color:s.color}}>·{s.en}</span>
+                </h3>
+                <p style={{margin:0,maxWidth:'44ch',color:'var(--ink-muted)',fontSize:14,lineHeight:1.6,paddingBottom:6}}>{s.blurb}</p>
+                <a href={'series.html?id='+s.id} className="kicker" style={{marginLeft:'auto',whiteSpace:'nowrap',textDecoration:'none',color:s.color,paddingBottom:6}}>查看全部 →</a>
+              </div>
+              {s.articles.slice(0,4).map((a,i)=>(<ArchiveRow key={i} a={a} s={s} n={i+1} onOpen={open}/>))}
+              {s.articles.length>4 && (
+                <a href={'series.html?id='+s.id} style={{display:'inline-flex',alignItems:'center',gap:8,marginTop:14,padding:'11px 20px',borderRadius:999,border:'1px solid var(--line)',background:'var(--surface)',color:'var(--ink)',textDecoration:'none',fontWeight:700,boxShadow:'var(--shadow-soft)'}}>
+                  进入「{s.name}」系列 · 共 {s.articles.length} 篇 <span style={{color:s.color}}>→</span>
+                </a>
+              )}
+            </div>
+          ))}
+        </section>
+
+        <section id="contact" style={{padding:'10px 32px 90px',maxWidth:1320,margin:'0 auto'}}>
+          <div style={{border:'1px solid var(--line)',borderRadius:22,padding:'44px 38px',background:'var(--surface)',boxShadow:'var(--shadow-soft)',
+            display:'flex',alignItems:'center',justifyContent:'space-between',gap:28,flexWrap:'wrap'}}>
+            <div style={{maxWidth:560}}>
+              <span className="kicker" style={{color:'var(--accent-hot)'}}>JOIN US · 加入我们</span>
+              <p className="serif" style={{margin:'14px 0 0',fontSize:'clamp(26px,3.2vw,44px)',fontWeight:800,color:'var(--ink)',lineHeight:1.2}}>如果你也对性别研究感兴趣</p>
+              <p style={{margin:'14px 0 0',color:'var(--ink-body)',fontSize:16,lineHeight:1.85}}>有想聊的话题，欢迎加入。</p>
+              <p style={{margin:'16px 0 0',color:'var(--ink-muted)'}}>联系方式：<a href={'mailto:'+brand.email} style={{color:'var(--ink)',borderBottom:'2px solid var(--accent-line)',textDecoration:'none',fontWeight:600}}>{brand.email}</a></p>
+            </div>
+            <Merit/>
+          </div>
+          <p style={{marginTop:24,color:'var(--ink-muted)',fontSize:13}}>© {new Date().getFullYear()} 咬笔 · 明听影思　|　{brand.tagline}</p>
+        </section>
+      </main>
+      <Sheet data={modal} onClose={()=>setModal(null)}/>
+    </div>
+  );
+}
+
+function Merit(){
+  const [t,setT]=React.useState([]);
+  const ping=()=>{ const id=performance.now(); setT(v=>[...v,id]); setTimeout(()=>setT(v=>v.filter(x=>x!==id)),900); };
+  return (
+    <span style={{position:'relative',display:'inline-flex'}}>
+      <button onClick={ping} style={{padding:'13px 22px',borderRadius:999,border:'1px solid var(--accent-line)',
+        background:'linear-gradient(135deg,var(--accent-soft),rgba(33,74,214,0.08))',color:'var(--ink)',fontWeight:700,boxShadow:'var(--shadow-soft)'}}>神秘按钮</button>
+      <span aria-hidden="true" style={{position:'absolute',inset:0,pointerEvents:'none'}}>
+        {t.map(id=>(<span key={id} className="serif" style={{position:'absolute',left:'50%',top:-6,transform:'translateX(-50%)',
+          color:'var(--accent-hot)',fontWeight:900,whiteSpace:'nowrap',animation:'meritF 900ms ease-out forwards'}}>功德+1</span>))}
+      </span>
+      <style>{`@keyframes meritF{0%{opacity:0;transform:translate(-50%,8px)}20%{opacity:1;transform:translate(-50%,-2px)}100%{opacity:0;transform:translate(-50%,-32px)}}`}</style>
+    </span>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
