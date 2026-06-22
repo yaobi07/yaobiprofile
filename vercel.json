@@ -1,4 +1,8 @@
 {
+  "buildCommand": null,
+  "outputDirectory": ".",
+  "installCommand": "",
+  "framework": null,
   "rewrites": [
     { "source": "/series", "destination": "/series.html" },
     { "source": "/((?!series\\.html|index\\.html|public/.*).*)", "destination": "/index.html" }
