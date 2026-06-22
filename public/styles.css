@@ -1,0 +1,10 @@
+/* ─────────────────────────────────────────────────────────
+   Yaobi Design System — global entry point.
+   Consumers link THIS file only. Imports must come first.
+   ───────────────────────────────────────────────────────── */
+@import "./tokens/colors.css";
+@import "./tokens/typography.css";
+@import "./tokens/fonts.css";
+@import "./tokens/spacing.css";
+@import "./tokens/effects.css";
+@import "./tokens/base.css";

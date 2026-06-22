@@ -1,0 +1,69 @@
+/* ─────────────────────────────────────────────────────────
+   Yaobi · Typography tokens
+   System sans + system mono. No webfonts shipped — the brand
+   intentionally rides the native UI stack for a clean,
+   editorial feel. A Chinese-friendly fallback chain is built
+   in (the product copy is primarily 中文).
+   ───────────────────────────────────────────────────────── */
+:root {
+  /* — Families —
+     Native UI stack (matches the source repo, which intentionally rides
+     system fonts). system-ui / -apple-system resolve to the platform CJK
+     face (PingFang on macOS/iOS, Microsoft YaHei on Windows, Noto on
+     Android/Linux) with no webfont to ship. */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  /* Editorial serif — literary 宋体 voice for big titles & 金句.
+     Webfont declared in tokens/fonts.css (Noto Serif SC). */
+  --font-serif: "Noto Serif SC", "Songti SC", "SimSun", Georgia,
+    "Times New Roman", serif;
+
+  /* — Weights — */
+  --fw-regular: 400; /* @kind font */
+  --fw-medium:  600; /* @kind font */  /* eyebrows, nav, meta */
+  --fw-semi:    650; /* @kind font */  /* buttons, links, card titles */
+  --fw-bold:    700; /* @kind font */  /* section + brand */
+  --fw-black:   800; /* @kind font */  /* display headline, merit toast */
+
+  /* — Display: oversized, tight, the hero voice — */
+  --display-size:   clamp(56px, 7.8vw, 120px);
+  --display-line:   0.94;  /* @kind other */
+  --display-track:  -3px;   /* @kind other */
+  --display-weight: var(--fw-black);
+
+  /* — Heading L: carousel / big editorial titles — */
+  --title-size:   clamp(40px, 3.6vw, 66px);
+  --title-line:   1.08;    /* @kind other */
+  --title-track:  -1.1px;  /* @kind other */
+
+  /* — Heading M: section titles — */
+  --section-size:  clamp(36px, 3.8vw, 58px);
+  --section-track: -1.4px;  /* @kind other */
+  --section-weight: var(--fw-bold);
+
+  /* — Heading S: card / capability titles — */
+  --card-title-size:  18px;
+  --capability-size:  24px;
+
+  /* — Body — */
+  --body-size:   16px;
+  --body-line:   1.55;   /* @kind other */
+  --body-track:  0.2px;  /* @kind other */
+  --lead-size:   19px;   /* subhead / lead paragraph */
+  --prose-line:  1.68; /* @kind other */  /* long-form reading line-height */
+
+  /* — Eyebrow / label (uppercase, tracked) — */
+  --eyebrow-size:  12px;
+  --eyebrow-track: 0.16em;  /* @kind other */
+  --eyebrow-weight: var(--fw-bold);
+
+  /* — Mono detail: tags, code — */
+  --mono-size:  12px;
+  --tag-size:   12px;
+
+  /* ── Semantic aliases ── */
+  --text-body:    var(--body-size)/var(--body-line) var(--font-sans);
+  --text-display: var(--display-weight) var(--display-size)/var(--display-line) var(--font-sans);
+}
