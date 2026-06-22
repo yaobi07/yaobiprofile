@@ -1,12 +1,14 @@
-# Netlify 部署说明见下方注释；在 Netlify 后台请与此保持一致。
+# 纯静态站点，不需要 build
 [build]
-  command = "npm run build"
-  publish = "dist"
+  publish = "."
+  command = ""
 
-[build.environment]
-  NODE_VERSION = "22"
+# 路由规则：/series 或 /series.html → series.html；其余 → index.html
+[[redirects]]
+  from = "/series"
+  to = "/series.html"
+  status = 200
 
-# 单页应用：任意路径都回到 index.html（避免直接打开子路径 404）
 [[redirects]]
   from = "/*"
   to = "/index.html"
