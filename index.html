@@ -357,9 +357,9 @@ img {
     background: var(--accent); color: var(--paper); display: grid; place-items: center; text-align: center;
     font-family: var(--font-serif); font-weight: 700; font-size: 16px; line-height: 1.25; transform: rotate(-9deg);
     box-shadow: 0 10px 24px rgba(197,75,60,0.35); }
-  .heroCap { margin: 22px 8px 0; max-width: clamp(220px,24vw,360px); text-align: right; }
+  .heroCap { margin: 22px 8px 0; max-width: clamp(220px,24vw,360px); text-align: right; min-height: clamp(100px,12vw,180px); display: flex; flex-direction: column; justify-content: flex-start; }
   .heroCap .hq { font-family: var(--font-serif); font-weight: 600; font-size: clamp(18px,1.7vw,26px);
-    line-height: 1.3; color: var(--ink); white-space: pre-line; transition: opacity 600ms ease; }
+    line-height: 1.3; color: var(--ink); white-space: pre-line; transition: opacity 600ms ease; min-height: clamp(72px,9vw,140px); }
   .heroCap .hq .qm { color: var(--accent-hot); }
   .heroCap .hfrom { margin-top: 10px; font: var(--fw-bold) 11px var(--font-sans); letter-spacing: 0.16em;
     text-transform: uppercase; color: var(--accent-hot); transition: opacity 600ms ease; }
