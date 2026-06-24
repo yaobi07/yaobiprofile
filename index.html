@@ -753,7 +753,7 @@ function Stage({reading,onOpen}){
         <div className="clusters">
           {desk.map((d,i)=>(<Folder key={i} a={d.a} s={d.s} tilt={TILTS[i]} onOpen={onOpen}/>))}
         </div>
-        <a href="#archive" className="scrollCue"><span>全部作品</span><span className="arr">↓</span></a>
+        <a href="#archive" className="scrollCue"><span className="arr">↓</span></a>
       </div>
     </section>
   );
@@ -833,14 +833,10 @@ function App(){
                   {s.name}<span style={{color:s.color}}>·{s.en}</span>
                 </h3>
                 <p style={{margin:0,maxWidth:'44ch',color:'var(--ink-muted)',fontSize:14,lineHeight:1.6,paddingBottom:6}}>{s.blurb}</p>
-                <a href={'series.html?id='+s.id} className="kicker" style={{marginLeft:'auto',whiteSpace:'nowrap',textDecoration:'none',color:s.color,paddingBottom:6}}>查看全部 →</a>
+                <a href={'series.html?id='+s.id} className="kicker" style={{marginLeft:'auto',whiteSpace:'nowrap',textDecoration:'none',color:s.color,paddingBottom:6,transition:'opacity .15s,transform .15s'}} onMouseDown={e=>{e.currentTarget.style.opacity='0.5';e.currentTarget.style.transform='scale(0.95)';}} onMouseUp={e=>{e.currentTarget.style.opacity='';e.currentTarget.style.transform='';}} onMouseLeave={e=>{e.currentTarget.style.opacity='';e.currentTarget.style.transform='';}}>查看全部 →</a>
               </div>
               {s.articles.slice(0,3).map((a,i)=>(<ArchiveRow key={i} a={a} s={s} n={i+1} onOpen={open}/>))}
-              {s.articles.length>3 && (
-                <a href={'series.html?id='+s.id} style={{display:'inline-flex',alignItems:'center',gap:8,marginTop:14,padding:'11px 20px',borderRadius:999,border:'1px solid var(--line)',background:'var(--surface)',color:'var(--ink)',textDecoration:'none',fontWeight:700,boxShadow:'var(--shadow-soft)'}}>
-                  进入「{s.name}」系列 · 共 {s.articles.length} 篇 <span style={{color:s.color}}>→</span>
-                </a>
-              )}
+              
             </div>
           ))}
         </section>
