@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>明听影思 · 写作书桌</title>
+<title>流动Fluidity · 写作书桌</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&display=swap"/>
@@ -482,10 +482,10 @@ img {
 window.YAOBI = {
   brand: {
     name: "咬笔",
-    account: "明听影思",
-    tagline: "在光明中倾听，在阴影中思考。",
+    account: "流动Fluidity",
+    tagline: "在流动中寻找确切。",
     sub: "性别视角，何以改造世界。",
-    intro: "这里是公众号《明听影思》的写作档案。两个系列，一些金句，慢慢读。",
+    intro: "这里是公众号《流动Fluidity》的写作档案。两个系列，一些金句，慢慢读。",
     email: "yaobi_07@163.com",
   },
   // 主视觉 / 视差用的大金句（均来自下方真实文章）
@@ -679,7 +679,7 @@ function Nav(){
         <span style={{width:11,height:11,borderRadius:999,background:'linear-gradient(135deg,var(--accent),var(--accent-warm))',boxShadow:'0 0 0 4px rgba(197,75,60,.15)',alignSelf:'center'}}/>
         <span style={{fontWeight:800,letterSpacing:'0.4px',fontSize:18}}>咬笔</span>
         <span style={{color:'var(--line)'}}>·</span>
-        <span className="serif" style={{fontSize:16,color:'var(--ink)'}}>明听影思</span>
+        <span className="serif" style={{fontSize:16,color:'var(--ink)'}}>流动Fluidity</span>
       </a>
       <nav style={{display:'flex',gap:6,alignItems:'center'}}>
         <a href="#archive" className="kicker" style={{textDecoration:'none',color:'var(--ink)',padding:'8px 12px'}}>全部作品</a>
@@ -738,8 +738,8 @@ function Stage({reading,onOpen}){
     <section id="top" className="stage">
       <div className="headZone">
         <div className="slogan">
-          <p className="kicker" style={{marginBottom:18}}>公众号《明听影思》· 写作书桌</p>
-          <h1>在光明中倾听，<br/><em>在阴影中思考。</em></h1>
+          <p className="kicker" style={{marginBottom:18}}>公众号《流动Fluidity》· 写作书桌</p>
+          <h1>在流动中<br/><em>寻找确切。</em></h1>
           <p className="sub">{brand.sub}</p>
         </div>
         <div className="avatarWrap">
@@ -852,7 +852,7 @@ function App(){
             </div>
             <Merit/>
           </div>
-          <p style={{marginTop:24,color:'var(--ink-muted)',fontSize:13}}>© {new Date().getFullYear()} 咬笔 · 明听影思　|　{brand.tagline}</p>
+          <p style={{marginTop:24,color:'var(--ink-muted)',fontSize:13}}>© {new Date().getFullYear()} 咬笔 · 流动Fluidity　|　{brand.tagline}</p>
         </section>
       </main>
       <Sheet data={modal} onClose={()=>setModal(null)}/>
