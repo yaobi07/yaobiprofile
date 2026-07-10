@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>流动Fluidity · 写作书桌</title>
+<title>流动Fluidity</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&display=swap"/>
@@ -738,8 +738,10 @@ function Stage({reading,onOpen}){
     <section id="top" className="stage">
       <div className="headZone">
         <div className="slogan">
-          <p className="kicker" style={{marginBottom:18}}>公众号《流动Fluidity》· 写作书桌</p>
-          <h1>在流动中<br/><em>寻找确切。</em></h1>
+          <h1 style={{position:'relative',lineHeight:1.05}}>
+            <span style={{display:'block'}}>在流动中</span>
+            <em style={{display:'block',textAlign:'right',paddingRight:'0.05em'}}>寻找确切。</em>
+          </h1>
           <p className="sub">{brand.sub}</p>
         </div>
         <div className="avatarWrap">
