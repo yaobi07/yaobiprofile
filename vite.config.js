@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import { resolve } from 'node:path'
 
 export default defineConfig({
-  base: '/yaobiprofile/',
+  base: './',
   plugins: [react()],
   build: {
     target: 'es2022',
