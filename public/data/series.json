@@ -1,0 +1,93 @@
+[
+  {
+    "id": "freeplay",
+    "name": "自由戏",
+    "en": "FREE PLAY",
+    "blurb": "以性别视角切入当下社会事件，话题不设边界。",
+    "color": "#e23b2e",
+    "dock": [
+      -31,
+      0,
+      -31
+    ],
+    "berth": [
+      -24,
+      0,
+      -24
+    ],
+    "model": "dock-freeplay.glb",
+    "articles": [
+      "cigarette",
+      "toilet",
+      "liberation"
+    ]
+  },
+  {
+    "id": "arrival",
+    "name": "到达",
+    "en": "ARRIVAL",
+    "blurb": "梳理新近的性别实证研究，结合时事展开分析。",
+    "color": "#3157c9",
+    "dock": [
+      32,
+      0,
+      -12
+    ],
+    "berth": [
+      24,
+      0,
+      -8
+    ],
+    "model": "dock-arrival.glb",
+    "articles": [
+      "radical",
+      "pregnancy",
+      "beauty",
+      "hetero"
+    ]
+  },
+  {
+    "id": "fluidity",
+    "name": "流动",
+    "en": "FLUIDITY",
+    "blurb": "追踪正在发生的变化，让经验、研究与叙事彼此汇流。",
+    "color": "#f07818",
+    "dock": [
+      28,
+      0,
+      34
+    ],
+    "berth": [
+      20,
+      0,
+      28
+    ],
+    "model": "dock-fluidity.glb",
+    "articles": [
+      "mom-index"
+    ]
+  },
+  {
+    "id": "other",
+    "name": "其他",
+    "en": "EARLY WORKS",
+    "blurb": "更早的书写与练笔，一些仍在河岸留下痕迹的起点。",
+    "color": "#25201d",
+    "dock": [
+      -34,
+      0,
+      29
+    ],
+    "berth": [
+      -25,
+      0,
+      23
+    ],
+    "model": "dock-early.glb",
+    "articles": [
+      "testaments",
+      "sex-rights",
+      "hidden-corner"
+    ]
+  }
+]

@@ -1,0 +1,171 @@
+[
+  {
+    "id": "cigarette",
+    "seriesId": "freeplay",
+    "title": "一根香烟，两种命运",
+    "quote": "男性抽烟的意象，在失去合理性的同时，反而获得了一种文化上的永恒感。",
+    "excerpt": "同一根香烟，递到不同的手里，写出的是两种命运。真实的渴望与精密的收编，有时是同时发生的。",
+    "tags": [
+      "身体",
+      "规训"
+    ],
+    "cover": "/covers/cigarette.png",
+    "href": "https://mp.weixin.qq.com/s/OjkEdP4ZYLT_g879FkSDNg"
+  },
+  {
+    "id": "toilet",
+    "seriesId": "freeplay",
+    "title": "厕所与性别：我们如何度过更好的三年？",
+    "quote": "厕所问题，也是一个性别问题。",
+    "excerpt": "排队、隔间、动线。看似中性的空间设计，处处写着谁被默认、谁被遗忘。",
+    "tags": [
+      "公共空间",
+      "性别"
+    ],
+    "cover": "/writing-cover-1.png",
+    "href": "https://mp.weixin.qq.com/s/f6at7XM9MBYkZ8kH26S0Pw"
+  },
+  {
+    "id": "liberation",
+    "seriesId": "freeplay",
+    "title": "一聊黄的就不痛了，我们是在性解放吗？",
+    "quote": "真正值得警惕的，不是痛的消失，而是我们失去了面对它的语言。",
+    "excerpt": "如果「一聊黄就不痛了」，值得警惕的也许不是痛的消失，而是我们失去了面对它的语言。",
+    "tags": [
+      "性政治",
+      "语言"
+    ],
+    "cover": "/writing-cover-3.png",
+    "href": "https://mp.weixin.qq.com/s/ExQ1EwGYoEiSDK6lyqcK2A"
+  },
+  {
+    "id": "radical",
+    "seriesId": "arrival",
+    "title": "一个偏旁，一系列问题",
+    "quote": "语言形式可能在无意识层面参与认知加工，并与性别刻板印象存在关联。",
+    "excerpt": "不改「嫉妒」的理由是什么？如果理由仅仅是「没人注意到」，那么这个理由本身正是问题。",
+    "tags": [
+      "语言",
+      "认知"
+    ],
+    "cover": "/covers/arrival-language.jpg",
+    "href": "https://mp.weixin.qq.com/s/J6IRBsYrQj8o7V8xeFBaVw"
+  },
+  {
+    "id": "pregnancy",
+    "seriesId": "arrival",
+    "title": "作为母亲晒「孕肚」，反而更「去人性」？",
+    "quote": "无需人性，只需生产。",
+    "excerpt": "这种歌颂带来的，可能只是被架空的「英雄」形象：无需人性，只需生产。",
+    "tags": [
+      "母职",
+      "身体"
+    ],
+    "cover": "/writing-cover-2.png",
+    "href": "https://mp.weixin.qq.com/s/SniRMS2rkwg7xj6-BpdEBQ"
+  },
+  {
+    "id": "beauty",
+    "seriesId": "arrival",
+    "title": "跟着美妆博主学化妆，我在取悦我自己吗？",
+    "quote": "化妆是不是在取悦自己，成为一个更难回答的现实问题。",
+    "excerpt": "由于后女权主义的自由预设，「化妆是不是在取悦自己」成为一个更难回答的现实问题。",
+    "tags": [
+      "美妆",
+      "后女权"
+    ],
+    "cover": "/covers/arrival-beauty.jpg",
+    "href": "https://mp.weixin.qq.com/s/qpvFG7EBQnlwz8ikLfLAFA"
+  },
+  {
+    "id": "hetero",
+    "seriesId": "arrival",
+    "title": "让我看上去像“异性恋”会保护我吗？",
+    "quote": "她们策略性地展演‘体面、结伴的异性恋’，以换取体面与骚扰缓冲。",
+    "excerpt": "她们策略性地展演异性恋规范，以换取程度不一的认同、体面与骚扰缓冲。",
+    "tags": [
+      "表演",
+      "异性恋规范"
+    ],
+    "cover": "/covers/arrival-hetero.jpg",
+    "href": "https://mp.weixin.qq.com/s/xa9yv_M1pCcK5MifQ7XNwQ"
+  },
+  {
+    "id": "mom-index",
+    "seriesId": "fluidity",
+    "title": "他们用“宝妈指数”衡量市场狂热",
+    "quote": "流动发生在指标、身份与市场彼此命名的时刻。",
+    "excerpt": "从一个被制造出来的指数出发，观察性别称呼如何进入市场叙事。",
+    "tags": [
+      "市场",
+      "身份"
+    ],
+    "cover": "/covers/fluidity-series.png",
+    "href": ""
+  },
+  {
+    "id": "room-bias-fear-escape",
+    "seriesId": "other",
+    "title": "一间房间 | 透过性别——偏见、恐慌与逃避",
+    "quote": "将‘厌男’和‘厌女’轻飘飘地对等，将一切引起舆论讨论的都归咎于制造对立、吸引流量，何尝不是一种偏见下的偷懒与逃避？",
+    "excerpt": "从性别议题中的偏见、恐慌与逃避出发，重新审视被轻易对等和归因的舆论讨论。",
+    "tags": [
+      "一间房间",
+      "性别"
+    ],
+    "cover": "/covers/room-bias-fear-escape.jpg",
+    "href": "https://mp.weixin.qq.com/s/kop9LaJ6t2W-jlpmUabhnw"
+  },
+  {
+    "id": "room-feminist-men",
+    "seriesId": "other",
+    "title": "一间房间 | 女性主义——属于女权男的英雄主义",
+    "quote": "如果‘迹’只是单纯作为一种表演，并不符合当下的需求，也只不过是一场粉色泡沫。",
+    "excerpt": "讨论女性主义表达中的表演、英雄主义，以及它们与现实需求之间的距离。",
+    "tags": [
+      "一间房间",
+      "女性主义"
+    ],
+    "cover": "/covers/room-feminist-men.png",
+    "href": "https://mp.weixin.qq.com/s/bBIiepgBeY-TvO7GY6RBaw"
+  },
+  {
+    "id": "room-gender-swap",
+    "seriesId": "other",
+    "title": "一间房间｜万物性转，是出路还是末路",
+    "quote": "当然，有时仍需警惕，当权力的话语体系被一种简单且娱乐的方式重新解构与再创作，也许对于坚不可摧的男性集团本身造成的伤害并不巨大，但起码作为一种新的形式，让更多女性可以进一步投身更大的思想浪潮，而有许多人已经开始着急。",
+    "excerpt": "当万物性转成为流行的再创作方式，它究竟在松动权力，还是停留在娱乐层面？",
+    "tags": [
+      "一间房间",
+      "性转"
+    ],
+    "cover": "/covers/room-gender-swap.png",
+    "href": "https://mp.weixin.qq.com/s/UwqV7YU9ud2NqrTqvhlMKQ"
+  },
+  {
+    "id": "heard-yuwenliang-zhangyouzhi",
+    "seriesId": "other",
+    "title": "听说 | 千万个“于文亮”“张有志”",
+    "quote": "我们惊恐地呼喊，想叫醒他，却喊出来自己的名字。但‘尸体’被移开之后，火车继续朝前，喷涌出乌黑乌黑的烟。一切如初。",
+    "excerpt": "从千万个普通人的名字出发，凝视被短暂唤醒又重新归于平静的生活。",
+    "tags": [
+      "听说",
+      "普通人"
+    ],
+    "cover": "/covers/heard-yuwenliang-zhangyouzhi.png",
+    "href": "https://mp.weixin.qq.com/s/PG6igwLDm6PZwndqWJcGGw"
+  },
+  {
+    "id": "hearding-xiucai",
+    "seriesId": "other",
+    "title": "听说ing | “秀才”世界背后的人",
+    "quote": "献上真实的关怀，给予真诚的拥抱，哪怕只将视角多分给他人一点点，让我们在携手寻找意义的路上，和这个世界一起慢慢回温。",
+    "excerpt": "越过流量人物本身，看见热闹背后的真实处境、情感需求与具体的人。",
+    "tags": [
+      "听说ing",
+      "关怀"
+    ],
+    "cover": "/covers/hearding-xiucai.png",
+    "href": "https://mp.weixin.qq.com/s/8Wb-URUuCNvBXwoVrhHFJA"
+  }
+]
