@@ -30,19 +30,28 @@ function useCoverPoints(series) {
   return useMemo(() => {
     const imageAspect = 16 / 9
     const viewportAspect = size.width / size.height
-    const isCompact = size.width <= 760
+    const isCompact = size.width <= 760 || matchMedia('(pointer: coarse)').matches
+    const isPortrait = isCompact && size.height > size.width
     const displayedWidth = isCompact
-      ? Math.min(size.width, size.height * imageAspect)
+      ? (isPortrait ? size.height * imageAspect : size.width)
       : (viewportAspect > imageAspect ? size.width : size.height * imageAspect)
     const displayedHeight = isCompact
-      ? displayedWidth / imageAspect
+      ? (isPortrait ? size.height : size.width / imageAspect)
       : (viewportAspect > imageAspect ? size.width / imageAspect : size.height)
-    const offsetX = (size.width - displayedWidth) / 2
+    const offsetX = isCompact ? 0 : (size.width - displayedWidth) / 2
     const offsetY = (size.height - displayedHeight) / 2
-    return Object.fromEntries(series.map((item) => [item.id, {
-      left: offsetX + item.x * displayedWidth,
-      top: offsetY + item.y * displayedHeight,
-    }]))
+    return {
+      points: Object.fromEntries(series.map((item) => {
+        const mobileY = isPortrait && item.id === 'freeplay' ? .22 : item.y
+        return [item.id, {
+          left: offsetX + item.x * displayedWidth,
+          top: offsetY + mobileY * displayedHeight,
+        }]
+      })),
+      frame: { width: displayedWidth, height: displayedHeight },
+      isCompact,
+      isPortrait,
+    }
   }, [series, size])
 }
 
@@ -71,15 +80,52 @@ function BuildingHotspot({ item, index, point, active, onActivate, onLeave, onEn
 
 function WorldView({ series, onEnter }) {
   const [active, setActive] = useState(null)
-  const points = useCoverPoints(series)
+  const [mobileIndex, setMobileIndex] = useState(0)
+  const worldRef = useRef(null)
+  const { points, frame, isCompact, isPortrait } = useCoverPoints(series)
+
+  useEffect(() => {
+    if (!isPortrait || !worldRef.current || !points[series[0]?.id]) return
+    worldRef.current.scrollLeft = Math.max(0, points[series[0].id].left - worldRef.current.clientWidth / 2)
+  }, [isPortrait, points, series])
 
   const handleEnter = (event, id) => {
     onEnter(id, event.clientX, event.clientY)
   }
 
+  const syncMobileIndex = () => {
+    if (!isPortrait || !worldRef.current) return
+    const center = worldRef.current.scrollLeft + worldRef.current.clientWidth / 2
+    const nextIndex = series.reduce((closest, item, index) => (
+      Math.abs(points[item.id].left - center) < Math.abs(points[series[closest].id].left - center)
+        ? index
+        : closest
+    ), 0)
+    setMobileIndex(nextIndex)
+  }
+
+  const focusMobileSeries = (index) => {
+    const point = points[series[index].id]
+    if (!point || !worldRef.current) return
+    setMobileIndex(index)
+    worldRef.current.scrollTo({
+      left: Math.max(0, point.left - worldRef.current.clientWidth / 2),
+      behavior: 'smooth',
+    })
+  }
+
   return (
-    <section className={`world-view ${active ? 'has-active' : ''}`}>
-      <img className="world-view__image" src={worldImage} alt="河流连接着四座建筑展馆" />
+    <section
+      ref={worldRef}
+      className={`world-view ${active ? 'has-active' : ''} ${isPortrait ? 'is-mobile-river' : ''}`}
+      onScroll={syncMobileIndex}
+    >
+      <img
+        className="world-view__image"
+        src={worldImage}
+        alt="河流连接着四座建筑展馆"
+        style={isCompact ? { width: frame.width, height: frame.height } : undefined}
+      />
       <div className="world-view__glint" />
       {series.map((item, index) => points[item.id] && (
         <BuildingHotspot
@@ -87,12 +133,27 @@ function WorldView({ series, onEnter }) {
           item={item}
           index={index}
           point={points[item.id]}
-          active={active === item.id}
+          active={active === item.id || (isPortrait && mobileIndex === index)}
           onActivate={() => setActive(item.id)}
           onLeave={() => setActive(null)}
           onEnter={handleEnter}
         />
       ))}
+      {isPortrait && (
+        <nav className="mobile-world-nav" aria-label="系列导航">
+          {series.map((item, index) => (
+            <button
+              key={item.id}
+              type="button"
+              className={mobileIndex === index ? 'is-active' : ''}
+              onClick={() => focusMobileSeries(index)}
+              aria-label={`前往${item.name}`}
+            >
+              {String(index + 1).padStart(2, '0')}
+            </button>
+          ))}
+        </nav>
+      )}
     </section>
   )
 }

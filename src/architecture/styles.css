@@ -69,6 +69,8 @@ button { font: inherit; }
   overflow: hidden;
 }
 
+.mobile-world-nav { display: none; }
+
 .world-view__image,
 .dock-view__image {
   width: 100%;
@@ -746,35 +748,91 @@ button { font: inherit; }
 }
 
 @media (pointer: coarse), (max-width: 760px) {
-  .architecture-header { padding: 15px; }
+  html, body, #root, .architecture-shell { height: 100dvh; }
+
+  .architecture-header {
+    position: fixed;
+    padding: calc(15px + env(safe-area-inset-top)) 15px 15px;
+  }
   .architecture-header strong { font-size: 24px; }
   .architecture-header span { font-size: 6px; }
-  .architecture-header a, .dock-view__back { width: 40px; height: 40px; }
-  .dock-view__back { top: 15px; right: 15px; }
-
-  .world-view__image {
-    object-fit: contain;
-    background: #e8e0d3;
+  .architecture-header a { display: none; }
+  .dock-view__back { width: 40px; height: 40px; }
+  .dock-view__back {
+    top: calc(15px + env(safe-area-inset-top));
+    right: calc(15px + env(safe-area-inset-right));
   }
 
+  .world-view {
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    touch-action: pan-x;
+  }
+
+  .world-view::-webkit-scrollbar { display: none; }
+
+  .world-view__image {
+    display: block;
+    max-width: none;
+    object-fit: fill;
+    background: transparent;
+  }
+
+  .world-view__glint { display: none; }
+
   .building-hotspot {
-    width: 92px;
-    height: 78px;
+    width: 150px;
+    height: 116px;
+    scroll-snap-align: center;
   }
 
   .building-hotspot__annotation {
-    width: 76px;
-    min-height: 38px;
-    padding: 5px 6px;
+    width: 108px;
+    min-height: 48px;
+    padding: 7px 8px;
   }
 
-  .building-hotspot__name { gap: 3px; }
-  .building-hotspot__name span { font-size: 10px; }
-  .building-hotspot__name strong { font-size: 14px; }
-  .building-hotspot__annotation > small { font-size: 6px; }
+  .building-hotspot__name { gap: 5px; }
+  .building-hotspot__name span { font-size: 12px; }
+  .building-hotspot__name strong { font-size: 19px; }
+  .building-hotspot__annotation > small { font-size: 8px; }
+
+  .mobile-world-nav {
+    position: fixed;
+    z-index: 28;
+    right: 50%;
+    bottom: calc(14px + env(safe-area-inset-bottom));
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 7px;
+    border: 1px solid rgba(37, 33, 28, .28);
+    background: rgba(235, 226, 211, .86);
+    transform: translateX(50%);
+    backdrop-filter: blur(8px);
+  }
+
+  .mobile-world-nav button {
+    width: 39px;
+    height: 30px;
+    padding: 0;
+    border: 0;
+    border-bottom: 1px solid transparent;
+    background: transparent;
+    color: rgba(29, 26, 22, .45);
+    font: 700 9px/1 ui-monospace, monospace;
+    cursor: pointer;
+  }
+
+  .mobile-world-nav button.is-active {
+    border-bottom-color: #27231f;
+    color: #27231f;
+  }
 
   .dock-view__identity {
-    top: 20px;
+    top: calc(20px + env(safe-area-inset-top));
     left: 16px;
     width: calc(100% - 80px);
   }
@@ -784,25 +842,29 @@ button { font: inherit; }
 
   .exhibition-band {
     grid-template-columns: 84px minmax(0, 1fr);
-    height: 45vh;
-    padding: 0 10px 10px;
+    height: 48dvh;
+    padding: 0 10px calc(10px + env(safe-area-inset-bottom));
   }
 
   .exhibition-band__label { width: 76px; height: 140px; padding: 11px; }
   .exhibition-band__label strong { font-size: 36px; }
   .exhibition-band__label small { line-height: 1.5; }
-  .exhibition-band__list { padding: 28px 12px 0 2px; }
+  .exhibition-band__list {
+    padding: 28px 12px 0 2px;
+    scroll-snap-type: x mandatory;
+  }
 
   .exhibition-item {
-    flex-basis: 270px;
+    flex-basis: min(270px, calc(100vw - 112px));
     grid-template-columns: 126px minmax(0, 1fr) 15px;
     gap: 10px;
     height: 184px;
     padding: 16px 12px;
+    scroll-snap-align: start;
   }
 
   .exhibition-item:first-child {
-    flex-basis: 310px;
+    flex-basis: min(286px, calc(100vw - 112px));
     grid-template-columns: 145px minmax(0, 1fr) 15px;
     height: 208px;
   }
@@ -817,7 +879,9 @@ button { font: inherit; }
   .exhibition-item h2 { font-size: 14px; }
   .exhibition-item p { font-size: 9px; -webkit-line-clamp: 2; }
 
-  .article-preview { padding: 7vh 18px 4vh; }
+  .article-preview {
+    padding: calc(7vh + env(safe-area-inset-top)) 18px calc(4vh + env(safe-area-inset-bottom));
+  }
   .article-preview__sheet {
     grid-template-columns: 1fr;
     width: min(520px, 100%);
