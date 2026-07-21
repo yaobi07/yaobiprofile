@@ -7,6 +7,7 @@
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
+    "publisher": "node scripts/article-publisher.mjs",
     "models": "\"D:/blender/blender.exe\" --background --python blender/build_assets_v2.py",
     "validate:models": "\"D:/blender/blender.exe\" --background --python blender/validate_assets.py",
     "data": "node scripts/export-data.mjs"

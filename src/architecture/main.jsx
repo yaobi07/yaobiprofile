@@ -159,7 +159,7 @@ function WorldView({ series, onEnter }) {
 }
 
 function ArticlePreview({ article, series, onClose }) {
-  const isPortraitCover = article.cover.startsWith('/book-')
+  const isPortraitCover = article.coverOrientation === 'portrait' || article.cover.startsWith('/book-')
 
   useEffect(() => {
     const closeOnEscape = (event) => {
@@ -244,7 +244,7 @@ function DockView({ series, articles, onBack }) {
         </div>
         <div className="exhibition-band__list" ref={listRef} onScroll={updateScrollState}>
           {articles.map((article, index) => {
-            const isPortraitCover = article.cover.startsWith('/book-')
+            const isPortraitCover = article.coverOrientation === 'portrait' || article.cover.startsWith('/book-')
             return (
               <button
                 key={article.id}

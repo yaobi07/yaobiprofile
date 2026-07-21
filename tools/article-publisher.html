@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>流动 · 文章发布器</title>
+    <style>
+      :root { color: #1f1c18; background: #e9e1d4; font-family: system-ui, "Microsoft YaHei", sans-serif; }
+      * { box-sizing: border-box; }
+      body { min-width: 320px; margin: 0; background: #e9e1d4; }
+      button, input, textarea, select { font: inherit; }
+      button { cursor: pointer; }
+      .shell { min-height: 100vh; }
+      header { display: flex; align-items: end; justify-content: space-between; gap: 24px; padding: 24px 30px; border-bottom: 1px solid rgba(31,28,24,.3); }
+      header h1 { margin: 0; font: 700 34px/1 Georgia, "Songti SC", serif; }
+      header p { margin: 7px 0 0; font: 700 9px/1.2 ui-monospace, monospace; letter-spacing: .12em; }
+      #connection { font: 700 10px/1 ui-monospace, monospace; color: #536d58; }
+      main { display: grid; grid-template-columns: minmax(420px, .95fr) minmax(400px, 1.05fr); min-height: calc(100vh - 94px); }
+      form { padding: 30px; border-right: 1px solid rgba(31,28,24,.3); }
+      fieldset { margin: 0 0 24px; padding: 0; border: 0; }
+      legend, label > span, .field-title { display: block; margin-bottom: 8px; font: 700 10px/1.2 ui-monospace, monospace; letter-spacing: .08em; }
+      .series-options { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid rgba(31,28,24,.45); }
+      .series-options label { position: relative; min-width: 0; border-right: 1px solid rgba(31,28,24,.25); }
+      .series-options label:last-child { border-right: 0; }
+      .series-options input { position: absolute; opacity: 0; }
+      .series-options span { display: grid; place-items: center; min-height: 54px; padding: 7px 4px; font: 600 14px/1.2 Georgia, "Songti SC", serif; text-align: center; }
+      .series-options input:checked + span { background: #27231f; color: #f4ecdf; }
+      .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 17px; }
+      .field { display: block; min-width: 0; }
+      .field.full { grid-column: 1 / -1; }
+      input[type="text"], input[type="url"], textarea, select { width: 100%; border: 1px solid rgba(31,28,24,.38); border-radius: 0; outline: 0; background: rgba(250,247,241,.72); color: inherit; }
+      input[type="text"], input[type="url"], select { height: 42px; padding: 0 12px; }
+      textarea { min-height: 94px; padding: 11px 12px; line-height: 1.65; resize: vertical; }
+      input:focus, textarea:focus, select:focus { border-color: #1f1c18; box-shadow: 0 0 0 1px #1f1c18; }
+      .upload { position: relative; display: grid; place-items: center; min-height: 116px; border: 1px dashed rgba(31,28,24,.5); background: rgba(250,247,241,.38); text-align: center; overflow: hidden; }
+      .upload input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+      .upload strong { font: 600 15px/1.4 Georgia, "Songti SC", serif; }
+      .upload small { display: block; margin-top: 5px; font: 700 8px/1.3 ui-monospace, monospace; opacity: .55; }
+      .upload.has-file { border-style: solid; }
+      .form-actions { display: flex; align-items: center; gap: 10px; margin-top: 25px; }
+      .form-actions button { height: 43px; padding: 0 18px; border: 1px solid #27231f; border-radius: 0; background: transparent; }
+      .form-actions .publish { background: #27231f; color: #f5ede0; }
+      .form-actions button:disabled { cursor: wait; opacity: .45; }
+      #status { flex: 1; min-width: 0; margin-left: 8px; font-size: 12px; line-height: 1.45; }
+      #status.is-error { color: #a33728; }
+      #status.is-success { color: #3f6848; }
+      .preview-pane { position: sticky; top: 0; display: grid; align-content: center; min-height: calc(100vh - 94px); padding: 6vh 5vw; overflow: hidden; background: #dcd2c2; }
+      .preview-pane::before { content: ""; position: absolute; inset: 0; opacity: .42; background: repeating-linear-gradient(172deg, transparent 0 34px, rgba(44,39,33,.07) 35px, transparent 37px); }
+      .preview-label { position: relative; margin-bottom: 12px; font: 700 9px/1 ui-monospace, monospace; letter-spacing: .12em; }
+      .preview { position: relative; display: grid; grid-template-columns: minmax(170px, .9fr) minmax(220px, 1.1fr); min-height: 350px; border: 1px solid rgba(31,28,24,.64); background: rgba(241,234,222,.96); box-shadow: 16px 22px 50px rgba(20,18,15,.17); }
+      .cover-frame { display: grid; place-items: center; min-height: 350px; padding: 24px; border-right: 1px solid rgba(31,28,24,.26); background: rgba(220,210,194,.58); overflow: hidden; }
+      .cover-frame img { display: none; width: 100%; max-height: 48vh; object-fit: contain; }
+      .cover-frame.has-cover img { display: block; }
+      .cover-frame span { font: 700 10px/1 ui-monospace, monospace; opacity: .45; }
+      .cover-frame.has-cover span { display: none; }
+      .preview-copy { display: flex; flex-direction: column; justify-content: center; min-width: 0; padding: 42px; }
+      .preview-copy > span, .preview-copy > small { font: 700 10px/1.4 ui-monospace, monospace; letter-spacing: .08em; opacity: .58; }
+      .preview-copy h2 { margin: 13px 0 24px; font: 700 30px/1.25 Georgia, "Songti SC", serif; overflow-wrap: anywhere; }
+      .preview-copy blockquote { margin: 0; padding-left: 18px; border-left: 2px solid #b54a36; color: #554e45; font: 500 15px/1.8 Georgia, "Songti SC", serif; }
+      .preview-copy small { margin-top: 20px; }
+      @media (max-width: 900px) {
+        main { grid-template-columns: 1fr; }
+        form { border-right: 0; border-bottom: 1px solid rgba(31,28,24,.3); }
+        .preview-pane { position: relative; min-height: 620px; }
+      }
+      @media (max-width: 560px) {
+        header { padding: 18px; }
+        header h1 { font-size: 27px; }
+        main form { padding: 22px 18px; }
+        .grid { grid-template-columns: 1fr; }
+        .field.full { grid-column: auto; }
+        .series-options { grid-template-columns: 1fr 1fr; }
+        .series-options label:nth-child(2) { border-right: 0; }
+        .series-options label:nth-child(-n+2) { border-bottom: 1px solid rgba(31,28,24,.25); }
+        .form-actions { flex-wrap: wrap; }
+        #status { flex-basis: 100%; margin: 4px 0 0; }
+        .preview-pane { min-height: 720px; padding: 35px 18px; }
+        .preview { grid-template-columns: 1fr; }
+        .cover-frame { min-height: 250px; border-right: 0; border-bottom: 1px solid rgba(31,28,24,.26); }
+        .preview-copy { padding: 30px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header>
+        <div><h1>流动 · 文章发布器</h1><p>FLUIDITY CONTENT DESK</p></div>
+        <span id="connection">LOCAL</span>
+      </header>
+      <main>
+        <form id="article-form">
+          <fieldset>
+            <legend>系列</legend>
+            <div class="series-options" id="series-options">
+              <label><input type="radio" name="seriesId" value="freeplay" checked><span>自由戏</span></label>
+              <label><input type="radio" name="seriesId" value="arrival"><span>到达</span></label>
+              <label><input type="radio" name="seriesId" value="fluidity"><span>流动</span></label>
+              <label><input type="radio" name="seriesId" value="other"><span>其他</span></label>
+            </div>
+          </fieldset>
+
+          <div class="grid">
+            <label class="field full"><span>文章标题</span><input id="title" name="title" type="text" required></label>
+            <label class="field full"><span>原文链接</span><input id="href" name="href" type="url" placeholder="https://mp.weixin.qq.com/s/..." required></label>
+            <label class="field full"><span>金句</span><textarea id="quote" name="quote" required></textarea></label>
+            <label class="field full"><span>摘要（可选）</span><textarea id="excerpt" name="excerpt"></textarea></label>
+            <label class="field"><span>标签</span><input id="tags" name="tags" type="text" placeholder="性别，公共空间"></label>
+            <label class="field"><span>系列内位置</span><select id="position" name="position"><option value="first">最新一篇</option><option value="last">最后一篇</option></select></label>
+            <div class="field full">
+              <span class="field-title">封面</span>
+              <label class="upload" id="upload-zone">
+                <input id="cover" name="cover" type="file" accept="image/png,image/jpeg,image/webp" required>
+                <span><strong>选择或拖入封面</strong><small>JPG / PNG / WEBP · MAX 12MB</small></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" id="save">保存到本地</button>
+            <button type="button" class="publish" id="publish">保存并发布</button>
+            <span id="status"></span>
+          </div>
+        </form>
+
+        <section class="preview-pane">
+          <span class="preview-label">ARTICLE PREVIEW</span>
+          <article class="preview">
+            <div class="cover-frame" id="cover-frame"><img id="preview-cover" alt=""><span>封面预览</span></div>
+            <div class="preview-copy">
+              <span id="preview-series">自由戏 / FREE PLAY</span>
+              <h2 id="preview-title">文章标题</h2>
+              <blockquote id="preview-quote">“文章金句”</blockquote>
+              <small id="preview-tags">标签</small>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      const series = {
+        freeplay: ['自由戏', 'FREE PLAY'],
+        arrival: ['到达', 'ARRIVAL'],
+        fluidity: ['流动', 'FLUIDITY'],
+        other: ['其他', 'EARLY WORKS'],
+      }
+      const form = document.querySelector('#article-form')
+      const title = document.querySelector('#title')
+      const quote = document.querySelector('#quote')
+      const tags = document.querySelector('#tags')
+      const cover = document.querySelector('#cover')
+      const status = document.querySelector('#status')
+      const saveButton = document.querySelector('#save')
+      const publishButton = document.querySelector('#publish')
+      let coverData = ''
+      let coverWidth = 0
+      let coverHeight = 0
+      let articleId = ''
+
+      function activeSeries() {
+        return form.querySelector('input[name="seriesId"]:checked').value
+      }
+
+      function updatePreview() {
+        const current = series[activeSeries()]
+        document.querySelector('#preview-series').textContent = `${current[0]} / ${current[1]}`
+        document.querySelector('#preview-title').textContent = title.value.trim() || '文章标题'
+        const quoteText = quote.value.trim().replace(/^“|”$/g, '') || '文章金句'
+        document.querySelector('#preview-quote').textContent = `“${quoteText}”`
+        document.querySelector('#preview-tags').textContent = tags.value.trim().replaceAll(',', ' / ').replaceAll('，', ' / ') || '标签'
+      }
+
+      async function readCover(file) {
+        if (!file) return
+        if (file.size > 12 * 1024 * 1024) throw new Error('封面不能超过 12MB。')
+        coverData = await new Promise((resolve, reject) => {
+          const reader = new FileReader()
+          reader.onload = () => resolve(reader.result)
+          reader.onerror = () => reject(new Error('无法读取封面。'))
+          reader.readAsDataURL(file)
+        })
+        const image = new Image()
+        await new Promise((resolve, reject) => {
+          image.onload = resolve
+          image.onerror = () => reject(new Error('封面格式无法识别。'))
+          image.src = coverData
+        })
+        coverWidth = image.naturalWidth
+        coverHeight = image.naturalHeight
+        const preview = document.querySelector('#preview-cover')
+        preview.src = coverData
+        document.querySelector('#cover-frame').classList.add('has-cover')
+        const zone = document.querySelector('#upload-zone')
+        zone.classList.add('has-file')
+        zone.querySelector('strong').textContent = file.name
+        zone.querySelector('small').textContent = `${coverWidth} × ${coverHeight}`
+      }
+
+      function setStatus(message, type = '') {
+        status.textContent = message
+        status.className = type ? `is-${type}` : ''
+      }
+
+      function payload(publish) {
+        const data = new FormData(form)
+        return {
+          articleId,
+          seriesId: activeSeries(),
+          title: data.get('title'),
+          href: data.get('href'),
+          quote: data.get('quote'),
+          excerpt: data.get('excerpt'),
+          tags: String(data.get('tags') || '').split(/[，,]/).map((item) => item.trim()).filter(Boolean),
+          position: data.get('position'),
+          coverData,
+          coverWidth,
+          coverHeight,
+          publish,
+        }
+      }
+
+      async function submit(publish) {
+        if (!form.reportValidity()) return
+        if (!coverData) { setStatus('请选择封面。', 'error'); return }
+        saveButton.disabled = true
+        publishButton.disabled = true
+        setStatus(publish ? '正在构建并发布…' : '正在保存…')
+        try {
+          const response = await fetch('/api/articles', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload(publish)),
+          })
+          const result = await response.json()
+          if (!response.ok) {
+            if (result.articleId) articleId = result.articleId
+            throw new Error(result.error || '操作失败。')
+          }
+          articleId = result.articleId
+          setStatus(result.published ? `已推送 · ${result.commit}，Vercel 正在部署。` : '已保存到本地，尚未上线。', 'success')
+        } catch (error) {
+          setStatus(error.message, 'error')
+        } finally {
+          saveButton.disabled = false
+          publishButton.disabled = false
+        }
+      }
+
+      form.addEventListener('input', updatePreview)
+      form.addEventListener('change', updatePreview)
+      cover.addEventListener('change', () => readCover(cover.files[0]).catch((error) => setStatus(error.message, 'error')))
+      saveButton.addEventListener('click', () => submit(false))
+      publishButton.addEventListener('click', () => submit(true))
+      fetch('/api/summary').then((response) => response.json()).then((data) => {
+        data.series.forEach((item) => {
+          const label = form.querySelector(`input[value="${item.id}"] + span`)
+          label.textContent = `${item.name} · ${item.count}`
+        })
+      }).catch(() => { document.querySelector('#connection').textContent = 'OFFLINE' })
+      updatePreview()
+    </script>
+  </body>
+</html>
