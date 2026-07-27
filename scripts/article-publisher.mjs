@@ -88,15 +88,22 @@ function run(command, args) {
     maxBuffer: 10 * 1024 * 1024,
   })
   if (result.status !== 0) {
-    const details = [result.stdout, result.stderr].filter(Boolean).join('\n').trim()
+    const details = [result.error?.message, result.stdout, result.stderr].filter(Boolean).join('\n').trim()
     throw new Error(details || `${command} 执行失败。`)
   }
   return result.stdout.trim()
 }
 
+function npmCommand() {
+  if (process.platform !== 'win32') return 'npm'
+  const localNpm = join(dirname(process.execPath), 'npm.cmd')
+  if (existsSync(localNpm)) return localNpm
+  if (existsSync('D:\\npm.cmd')) return 'D:\\npm.cmd'
+  return 'npm.cmd'
+}
+
 function publishArticle(title, coverPath) {
-  const npm = process.platform === 'win32' ? 'npm.cmd' : 'npm'
-  run(npm, ['run', 'build'])
+  run(npmCommand(), ['run', 'build'])
   const files = [
     relative(ROOT, DATA_PATH).replaceAll('\\', '/'),
     relative(ROOT, coverPath).replaceAll('\\', '/'),
