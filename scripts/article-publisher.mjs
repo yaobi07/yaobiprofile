@@ -60,6 +60,19 @@ function normalizeQuote(value) {
   return quote.replaceAll('“', '‘').replaceAll('”', '’')
 }
 
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
+function normalizeTitle(value, seriesId) {
+  let title = String(value || '').trim()
+  const labels = [SERIES[seriesId]?.name, SERIES[seriesId]?.en].filter(Boolean)
+  for (const label of labels) {
+    title = title.replace(new RegExp(`^\\s*${escapeRegExp(label)}\\s*(?:[|｜/／:：-]+)\\s*`, 'i'), '').trim()
+  }
+  return title
+}
+
 function safeId(seriesId, href) {
   let token = ''
   try {
@@ -124,7 +137,7 @@ function publishArticle(title, coverPath) {
 
 async function saveArticle(payload) {
   const seriesId = String(payload.seriesId || '')
-  const title = String(payload.title || '').trim()
+  const title = normalizeTitle(payload.title, seriesId)
   const href = String(payload.href || '').trim()
   const quote = normalizeQuote(payload.quote)
   const excerpt = String(payload.excerpt || '').trim() || quote.slice(0, 110)
