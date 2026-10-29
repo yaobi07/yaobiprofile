@@ -333,6 +333,16 @@ button { font: inherit; }
 .exhibition-item.is-portrait-cover img { width: 112px; height: 162px; }
 .exhibition-item.is-portrait-cover:first-child { grid-template-columns: 138px minmax(0, 1fr) 18px; }
 .exhibition-item.is-portrait-cover:first-child img { width: 138px; height: 200px; }
+.missing-cover {
+  display: grid;
+  place-items: center;
+  min-height: 80px;
+  width: 100%;
+  background: #f4f1eb;
+  border: 1px solid #b5aaa0;
+  color: #776e65;
+  font-size: 12px;
+}
 .exhibition-item > div { min-width: 0; }
 .exhibition-item > div > span { font: 700 7px ui-monospace, monospace; opacity: .5; }
 .exhibition-item h2 {

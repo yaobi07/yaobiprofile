@@ -176,7 +176,7 @@ function ArticlePreview({ article, series, onClose }) {
       <article className="article-preview__sheet">
         <button className="article-preview__close" type="button" onClick={onClose} title="关闭预览"><X /></button>
         <div className="article-preview__cover">
-          <img src={asset(article.cover.replace(/^\//, ''))} alt={article.title} />
+          {article.cover ? <img src={asset(article.cover.replace(/^\//, ''))} alt={article.title} /> : <span className="missing-cover">封面待补充</span>}
         </div>
         <div className="article-preview__copy">
           <span>{series.name} / {series.en}</span>
@@ -253,7 +253,7 @@ function DockView({ series, articles, onBack }) {
                 onClick={() => setPreview(article)}
                 aria-label={`预览：${article.title}`}
               >
-                <img src={asset(article.cover.replace(/^\//, ''))} alt="" />
+                {article.cover ? <img src={asset(article.cover.replace(/^\//, ''))} alt="" /> : <span className="missing-cover">封面待补充</span>}
                 <div>
                   <span>{String(index + 1).padStart(2, '0')}</span>
                   <h2>{article.title}</h2>
